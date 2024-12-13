@@ -230,7 +230,7 @@ html, body{ height: 100%; }
      position: absolute;
      left: 50%;
      top: 50%;
-     background-image: url(../images/loader-animation.gif);
+     background-image: url(../images/logo.png);
      background-repeat: no-repeat;
      background-position: center;
      margin: -100px 0 0 -100px;
@@ -916,7 +916,7 @@ html, body{ height: 100%; }
 -------------------------------------------------------------------*/
 
 .team-main{
-	background:url(../images/team_bg.jpg) no-repeat center;
+	/* background:url(../images/team_bg.jpg) no-repeat center; */
 	background-attachment:fixed;
 	background-size:cover;
 	position:relative;
@@ -927,14 +927,14 @@ html, body{ height: 100%; }
     display: inline-block;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.50);
+    /* background-color: rgba(0, 0, 0, 0.50); */
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .team-main .block-title{
-	color:#fff;
+	color:#ED3136;
 }
 
 .sf-team{
