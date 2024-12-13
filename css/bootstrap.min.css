@@ -178,7 +178,7 @@ td,th{
         page-break-inside:avoid
     }
     img{
-        max-width:100% !important
+        100% !important
     }
     p,h2,h3{
         orphans:3;
