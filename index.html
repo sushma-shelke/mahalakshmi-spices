@@ -71,7 +71,7 @@
                                     <li><a href="#our_team">News</a></li>
                                     <li><a href="#contact">Contact us</a></li>
                                     <li><a href="./stockAllocationForm.html">Stakeholders Certificate</a></li>
-                                    <li><a href="./login.html">Login</a></li>
+                                    <!-- <li><a href="./login.html">Login</a></li> -->
                                  
                                 </ul>
                             </div>
@@ -543,8 +543,57 @@
             window.open(whatsappURL);
         }
         </script>
+
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
+
+    <script>
+        // Check for sessionStorage values
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = sessionStorage.getItem("token");
+            const message = sessionStorage.getItem("message");
+            const status = sessionStorage.getItem("status");
+    
+            // Target the navbar
+            const navbar = document.querySelector(".navbar-nav");
+    
+            // Logout Button
+            const logoutItem = `
+              <li class="nav-item">
+                  <a class="nav-link text-white active" href="./userlist.html">USERLIST</a>
+                
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" id="logoutBtn">LOGOUT</a>
+                </li>
+
+            `;
+    
+            // Login Button
+            const loginItem = `
+          
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="./login.html">LOGIN</a>
+                </li>
+            `;
+    
+            if (token && message && status) {
+                // If token, message, and status exist, show logout button
+                navbar.innerHTML += logoutItem;
+    
+                // Add event listener for logout
+                document.getElementById("logoutBtn").addEventListener("click", function() {
+                    // Clear sessionStorage and redirect
+                    sessionStorage.clear();
+                    alert("You have successfully logged out.");
+                    window.location.href = 'index.html';
+                });
+            } else {
+                // If not logged in, ensure login button is visible
+                navbar.innerHTML += loginItem;
+            }
+        });
+    </script>
 </body>
 
 </html>
