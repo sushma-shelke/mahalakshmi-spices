@@ -1944,3 +1944,95 @@ textarea{
     margin-left: 0px; 
     margin-right: 0px;
 }
+
+
+
+
+
+
+
+.newspaper-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.newspaper-item {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.newspaper-item:hover {
+    transform: translateY(-5px);
+}
+
+.newspaper-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.overlay span {
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.newspaper-item:hover .overlay {
+    opacity: 1;
+}
+
+/* Modal Styles */
+.zoom-container {
+    max-height: 90vh;
+    overflow: auto;
+    cursor: zoom-in;
+}
+
+.zoom-container img {
+    max-width: 90vw;
+    object-fit: contain;
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+    .newspaper-container {
+        gap: 20px;
+        padding: 10px;
+    }
+    
+    .newspaper-item {
+        max-width: 100%;
+    }
+}
+
+/* Zoom functionality */
+.zoomed {
+    transform: scale(1.5);
+    cursor: zoom-out !important;
+}
