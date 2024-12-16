@@ -1425,8 +1425,8 @@ html, body{ height: 100%; }
 }
 
 .form-reservations-box{
-	width:70%;
-	margin:0 auto;
+	/* width:70%;
+	margin:0 auto; */
 }
 
 .reservations-main h4{
@@ -1528,7 +1528,7 @@ html, body{ height: 100%; }
 
 .reserve-book-btn button:hover {
     background: none;
-    color: #202020;
+    color: #ED3136;
 }
 
 .reserve-book-btn button  {
@@ -1904,4 +1904,39 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 
 .vivid-yellow-bg{
 	background: #fdcb03;
+}
+
+.whatsapp-button {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.whatsapp-button:hover {
+    background-color: #128C7E;
+}
+
+.whatsapp-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+textarea{
+    width: 100%;
+    border: 2px dotted #ccc;
+    background: #f5f5f5;
+    color: #202020;
+    padding: 12px;
+    text-transform: capitalize;
+    border-radius: 4px;
+    opacity: 1;
+    min-height: 54px;
 }
