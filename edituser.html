@@ -184,6 +184,11 @@
                     </div>
 
                     <div class="col-md-6">
+                        <label class="form-label">Return of interest</label>
+                        <input type="number" class="form-control" id="roi" required>
+                    </div>
+
+                    <div class="col-md-6">
                         <label class="form-label">Date</label>
                         <input type="date" class="form-control" id="date" readonly style="background-color: #e9ecef;">
                     </div>
@@ -223,6 +228,7 @@
                 document.getElementById('address').value = data.address;
                 document.getElementById('contactNo').value = data.contactNo;
                 document.getElementById('place').value = data.place;
+                document.getElementById('roi').value = data.roi;
                 document.getElementById('nomineeNameAndAddress').value = data.nomineeNameAndAddress;
                 document.getElementById('totalAmount').value = data.totalAmount;
 
@@ -249,6 +255,7 @@
                 address: document.getElementById('address').value,
                 contactNo: document.getElementById('contactNo').value,
                 place: document.getElementById('place').value,
+                roi: document.getElementById('roi').value,
                 nomineeNameAndAddress: document.getElementById('nomineeNameAndAddress').value,
                 totalAmount: parseFloat(document.getElementById('totalAmount').value),
                 date: new Date(document.getElementById('date').value).toISOString(),
