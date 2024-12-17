@@ -263,9 +263,9 @@
                 nomineeNameAndAddress: document.getElementById('nomineeNameAndAddress').value,
                 totalAmount: parseFloat(document.getElementById('totalAmount').value),
                 date: new Date(document.getElementById('date').value).toISOString(),
-                validTill: new Date(document.getElementById('validTill').value).toISOString(),
+                // validTill: new Date(document.getElementById('validTill').value).toISOString(),
     //             date: new Date(document.getElementById('date').value).toISOString().split('T')[0],
-    // validTill: new Date(document.getElementById('validTill').value).toISOString().split('T')[0],
+    validTill: new Date(document.getElementById('validTill').value).toISOString().split('T')[0],
 
                 certificateURL: "certificate",
                 certificateNo:document.getElementById('certificateNo').value,
