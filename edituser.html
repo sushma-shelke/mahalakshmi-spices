@@ -143,7 +143,7 @@
     <div class="container" style=" margin-top: 100px;" >
         <div class="edit-container">
             <div class="header">
-                <h3 class="text-center">Edit Stock Allocation Details</h3>
+                <h3 class="text-center">Edit Stakeholders Details</h3>
             </div>
 
             <form id="editForm" onsubmit="handleSubmit(event)">
@@ -184,13 +184,17 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Return of interest</label>
+                        <label class="form-label">Monthly Return of interest (%)</label>
                         <input type="number" class="form-control" id="roi" required>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Date</label>
                         <input type="date" class="form-control" id="date" readonly style="background-color: #e9ecef;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Certificate No</label>
+                        <input type="text" class="form-control" id="certificateNo" readonly style="background-color: #e9ecef;">
                     </div>
 
                     <div class="col-md-6">
@@ -231,6 +235,7 @@
                 document.getElementById('roi').value = data.roi;
                 document.getElementById('nomineeNameAndAddress').value = data.nomineeNameAndAddress;
                 document.getElementById('totalAmount').value = data.totalAmount;
+                document.getElementById('certificateNo').value=data.certificateNo;
 
                 // Format dates
                 if(data.date) {
@@ -260,7 +265,8 @@
                 totalAmount: parseFloat(document.getElementById('totalAmount').value),
                 date: new Date(document.getElementById('date').value).toISOString(),
                 validTill: new Date(document.getElementById('validTill').value).toISOString(),
-                certificateURL: "certificate"
+                certificateURL: "certificate",
+                certificateNo:document.getElementById('certificateNo').value,
             };
 
             try {

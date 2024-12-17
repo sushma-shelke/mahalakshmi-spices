@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${item.contactNo}</td>
                     <td>${item.nomineeNameAndAddress}</td>
                     <td>₹${amount.toLocaleString()}</td>
-                    <td>${item.roi?item.roi:"-"}</td>
+                    <td>${item.roi?item.roi:"0"}%</td>
                    
                     <td>
                         <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
@@ -523,7 +523,7 @@ async function confirmItem(id, contactNo, nameOfHolders) {
         displayData(currentPage);
     } catch (error) {
         console.error('Error:', error);
-        alert('Error confirming application. Please try again.');
+        alert('Please check all fields are filled or not Specially Monthly return. Please try again.');
     } finally {
         toggleLoading(false);
     }
