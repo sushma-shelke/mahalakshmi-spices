@@ -425,7 +425,7 @@ async function displayData(page) {
             <td>${item.contactNo}</td>
             <td>${item.nomineeNameAndAddress}</td>
             <td>₹${amount.toLocaleString()}</td>
-            <td>${item.roi ? item.roi : "-"}</td>
+            <td>${item.roi ? item.roi : "0"}%</td>
             <td>
                 <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
             </td>
