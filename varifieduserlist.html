@@ -152,13 +152,25 @@
     
 	<!-- end site-header -->
 	
- <section id="banner" style="margin-top: 120px;">
+    <section style="margin-top: 120px;">
+   
+        <div class="container-fluid">
+         <div class="d-flex justify-content-end mb-4">
+             <a href="userlist.html">
+             <button class="btn btn-danger" style="font-size: 18px; padding: 12px 24px; font-weight: 500; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                 View Pending Stakeholders List
+             </button>
+         </a>
+         </div>
+     </div>     
+        </section>
+     <section id="banner" >
     <div class="loading-spinner" style="display:none;">Loading...</div>
 <div class="overlay" style="display:none;"></div>
     <div class="container-fluid py-4">
         <div class="card shadow-sm">
             <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center" style=" background-color:#EC3236">
-                <h5 class="mb-0">Stock Allocation List</h5>
+                <h4 class="mb-0">All Stakeholders List</h4>
                 <!-- <input type="text" class="form-control form-control-sm w-auto" placeholder="Search..." id="searchInput"> -->
             </div>
             <div class="card-body">
@@ -175,7 +187,7 @@
                                 <th>Total Amount (₹)</th>
                                 <th>Monthly Returns </th>
                                 
-                                <th>Edit</th>
+                                <!-- <th>Edit</th> -->
                                 
                                 <th>Delete</th>
 
@@ -221,33 +233,7 @@
                                 authentic spice blends loved by families across generations. Our journey began with a simple
                                 yet powerful vision—to offer pure, high-quality masalas that enrich every meal with flavor
                                 and authenticity.</p>
-                         <!--   <ul class="socials-box footer-socials pull-left">
-                                <li>
-                                    <a href="#">
-                                        <div class="social-circle-border"><i class="fa  fa-facebook"></i></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="social-circle-border"><i class="fa fa-twitter"></i></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="social-circle-border"><i class="fa fa-google-plus"></i></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="social-circle-border"><i class="fa fa-pinterest"></i></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="social-circle-border"><i class="fa fa-linkedin"></i></div>
-                                    </a>
-                                </li>
-                            </ul> -->
+                        
 
                         </div>
                                                </div> 
@@ -284,25 +270,7 @@
                             </p>
                         </div>
                     </div> 
-                    <!-- end col -->
-                    <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="footer-box-d">
-                            <h3>Opening Hours</h3>
-
-                            <ul>
-                                <li>
-                                    <p>Monday - Thursday </p>
-                                    <span> 11:00 AM - 9:00 PM</span>
-                                </li>
-                                <li>
-                                    <p>Friday - Saturday </p>
-                                    <span> 11:00 AM - 5:00 PM</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </div> -->
-                    <!-- end col -->
+                   
                 </div>
                 <!-- end footer-in-main -->
             </div>
@@ -412,59 +380,119 @@ function updateRange(start, end, total) {
 document.addEventListener('DOMContentLoaded', () => {
     displayData(currentPage);
 });
-        async function fetchData(page = 0) {
-            toggleLoading(true);
-            try {
-                const response = await fetch(`https://mumbailocal.org:8084/api/v1/users`);
-                if (!response.ok) throw new Error('Failed to fetch data');
-                return await response.json();
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error loading data');
-                return { content: [], currentPage: 0, totalPages: 0, totalItems: 0 };
-            } finally {
-                toggleLoading(false);
-            }
-        }
 
-        async function displayData() {
-            const data = await fetchData();
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = '';
+async function fetchData(page = 0) {
+    toggleLoading(true);
+    try {
+        const response = await fetch(`https://mumbailocal.org:8084/api/v1/users?page=${page}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const allData = await response.json();
+        
+        // Calculate start and end index for pagination
+        const startIndex = page * 10;
+        const endIndex = startIndex + 10;
+        
+        return {
+            content: allData.slice(startIndex, endIndex),
+            totalPages: Math.ceil(allData.length / 10),
+            totalItems: allData.length,
+            currentPage: page
+        };
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error loading data');
+        return { content: [], currentPage: 0, totalPages: 0, totalItems: 0 };
+    } finally {
+        toggleLoading(false);
+    }
+}
 
-            data.content.forEach(item => {
-                const amount = parseFloat(item.totalAmount);
-                const returns = calculateReturns(amount);
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                                     <td>${formatDate(item.date?item.date:item.validTill)}</td>
-                    <td>${item.nameOfHolders}</td>
-                    <td>${item.occupation}</td>
-                    <td>${item.address}</td>
-                    <td>${item.contactNo}</td>
-                    <td>${item.nomineeNameAndAddress}</td>
-                    <td>₹${amount.toLocaleString()}</td>
-                    <td>${item.roi?item.roi:"-"}</td>
-                   
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
-                    </td>
-                   
-                    <td>
-                         <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
+async function displayData(page) {
+    const data = await fetchData(page);
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
 
-            updatePagination(data.totalPages);
-            updateRange(page * data.content.length + 1, 
-                       Math.min((page + 1) * data.content.length, data.totalItems), 
-                       data.totalItems);
-        }
+    data.content.forEach(item => {
+        const amount = parseFloat(item.totalAmount);
+        const returns = calculateReturns(amount);
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${formatDate(item.date ? item.date : item.validTill)}</td>
+            <td>${item.nameOfHolders}</td>
+            <td>${item.occupation}</td>
+            <td>${item.address}</td>
+            <td>${item.contactNo}</td>
+            <td>${item.nomineeNameAndAddress}</td>
+            <td>₹${amount.toLocaleString()}</td>
+            <td>${item.roi ? item.roi : "-"}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
 
-        async function editItem(id) { window.location.href=`edituser.html?id=${id}`
+    updatePagination(data.totalPages);
+    updateRange(
+        page * 10 + 1,
+        Math.min((page + 1) * 10, data.totalItems),
+        data.totalItems
+    );
+}
+//         async function fetchData(page = 0) {
+//             toggleLoading(true);
+//             try {
+//                 const response = await fetch(`https://mumbailocal.org:8084/api/v1/users?page=${page}`);
+//                 if (!response.ok) throw new Error('Failed to fetch data');
+//                 return await response.json();
+//             } catch (error) {
+//                 console.error('Error:', error);
+//                 alert('Error loading data');
+//                 return { content: [], currentPage: 0, totalPages: 0, totalItems: 0 };
+//             } finally {
+//                 toggleLoading(false);
+//             }
+//         }
+//         async function displayData() {
+//     const data = await fetchData();
+//     console.log(data, "data");
+//     const tableBody = document.getElementById('tableBody');
+//     tableBody.innerHTML = '';
+
+//     // Changed from data.content to data directly since it's an array
+//     data.forEach(item => {
+//         const amount = parseFloat(item.totalAmount);
+//         const returns = calculateReturns(amount);
+//         console.log(item, "item");
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//             <td>${formatDate(item.date ? item.date : item.validTill)}</td>
+//             <td>${item.nameOfHolders}</td>
+//             <td>${item.occupation}</td>
+//             <td>${item.address}</td>
+//             <td>${item.contactNo}</td>
+//             <td>${item.nomineeNameAndAddress}</td>
+//             <td>₹${amount.toLocaleString()}</td>
+//             <td>${item.roi ? item.roi : "-"}</td>
+           
+//             <td>
+//                 <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+//             </td>
+//         `;
+//         tableBody.appendChild(row);
+//     });
+
+//     // <td>
+//     //             <button class="btn btn-sm btn-primary" onclick="window.location.href='edituser.html?id=${item.id}'">Edit</button>
+//     //         </td>
+//     // Update pagination if needed - modify based on your API response
+//     const totalPages = Math.ceil(data.length / 10); // Assuming 10 items per page
+//     updatePagination(totalPages);
+//     updateRange(1, data.length, data.length);
+// }
+
+    async function editItem(id) { window.location.href=`edituser.html?id=${id}`
         }
        
 
