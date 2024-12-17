@@ -9,7 +9,9 @@
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
-
+<!-- Site Icons -->
+<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+<link rel="apple-touch-icon" href="images/logo.png">
     <!-- Site Metas -->
     <title>Mahalaxmi Masala</title>
     <meta name="keywords" content="">
@@ -140,7 +142,7 @@
             </div>
           </div>
           <div class="text-center mt-4 " style="margin-top: 20px;">
-            <button type="button" class="btn btn-lg " style="background-color: #ED3136;color: #FFFFFF;margin: 5px;" onclick="submitForm()">Submit</button>
+            <button type="button" class="btn btn-lg " id="submitButton"  style="background-color: #ED3136;color: #FFFFFF;margin: 5px;" onclick="submitForm()">Submit</button>
           </div>
         </form>
       </div>
@@ -163,33 +165,7 @@
                                       authentic spice blends loved by families across generations. Our journey began with a simple
                                       yet powerful vision—to offer pure, high-quality masalas that enrich every meal with flavor
                                       and authenticity.</p>
-                               <!--   <ul class="socials-box footer-socials pull-left">
-                                      <li>
-                                          <a href="#">
-                                              <div class="social-circle-border"><i class="fa  fa-facebook"></i></div>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <div class="social-circle-border"><i class="fa fa-twitter"></i></div>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <div class="social-circle-border"><i class="fa fa-google-plus"></i></div>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <div class="social-circle-border"><i class="fa fa-pinterest"></i></div>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <div class="social-circle-border"><i class="fa fa-linkedin"></i></div>
-                                          </a>
-                                      </li>
-                                  </ul> -->
+                           
   
                               </div>
                                                      </div> 
@@ -226,25 +202,7 @@
                                   </p>
                               </div>
                           </div> 
-                          <!-- end col -->
-                          <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                              <div class="footer-box-d">
-                                  <h3>Opening Hours</h3>
-  
-                                  <ul>
-                                      <li>
-                                          <p>Monday - Thursday </p>
-                                          <span> 11:00 AM - 9:00 PM</span>
-                                      </li>
-                                      <li>
-                                          <p>Friday - Saturday </p>
-                                          <span> 11:00 AM - 5:00 PM</span>
-                                      </li>
-                                  </ul>
-                              </div>
-                              
-                          </div> -->
-                          <!-- end col -->
+                         
                       </div>
                       <!-- end footer-in-main -->
                   </div>
@@ -273,17 +231,7 @@
 
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
-   <!-- <section id="color-panel" class="close-color-panel">
-        <a class="panel-button gray2"><i class="fa fa-cog fa-spin fa-2x"></i></a>
-        
-        <div class="segment">
-            <h4 class="gray2 normal no-padding">Color Scheme</h4>
-            <a title="orange" class="switcher orange-bg"></a>
-            <a title="strong-blue" class="switcher strong-blue-bg"></a>
-            <a title="moderate-green" class="switcher moderate-green-bg"></a>
-            <a title="vivid-yellow" class="switcher vivid-yellow-bg"></a>
-        </div>
-    </section>-->
+  
 
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
@@ -372,6 +320,9 @@
       }
     
       async function submitForm() {
+        const button = document.getElementById('submitButton');
+    button.disabled = true;
+  button.textContent = "Submitting..."; 
         const place = await getCurrentLocation();
     
         const formData = {
@@ -387,10 +338,14 @@
           verified: false,
         };
     
+        // if (!validateForm(formData)) {
+        //   return;
+        // }
         if (!validateForm(formData)) {
-          return;
-        }
-    
+    button.disabled = false; // Re-enable the button if validation fails
+    button.textContent = "Submit";
+    return;
+  }
         try {
           const response = await fetch('https://mumbailocal.org:8084/api/v1/submit/details', {
             method: 'POST',
@@ -415,7 +370,11 @@
         } catch (error) {
           console.error('Error submitting form:', error);
           alert('Error submitting form. Please try again.');
-        }
+        } finally {
+    // Re-enable the button after submission
+    button.disabled = false;
+    button.textContent = "Submit";
+  }
       }
   
       // Initialize page
