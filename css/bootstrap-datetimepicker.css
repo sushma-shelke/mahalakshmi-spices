@@ -292,7 +292,7 @@
   cursor: pointer;
 }
 .bootstrap-datetimepicker-widget table td.old,
-.bootstrap-datetimepicker-widget table td.new {
+.bootstrap-datetimepicker-widget table .new {
   color: #777777;
 }
 .bootstrap-datetimepicker-widget table td.today {
