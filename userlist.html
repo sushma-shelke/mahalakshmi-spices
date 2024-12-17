@@ -435,47 +435,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleLoading(false);
             }
         }
-
         async function displayData(page) {
-            const data = await fetchData(page);
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = '';
+    const data = await fetchData(page);
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
 
-            data.content.forEach(item => {
-                const amount = parseFloat(item.totalAmount);
-                const returns = calculateReturns(amount);
+    data.content.forEach(item => {
+        const amount = parseFloat(item.totalAmount);
+        const returns = calculateReturns(amount);
+        
+        const row = document.createElement('tr');
+        // Check if roi is 0, null, or undefined
+        const isRoiValid = item.roi && item.roi !== "0" && item.roi !== 0;
+        
+        row.innerHTML = `
+            <td>${formatDate(item.date?item.date:item.validTill)}</td>
+            <td>${item.nameOfHolders}</td>
+            <td>${item.occupation}</td>
+            <td>${item.address}</td>
+            <td>${item.contactNo}</td>
+            <td>${item.nomineeNameAndAddress}</td>
+            <td>₹${amount.toLocaleString()}</td>
+            <td>${item.roi ? item.roi : "0"}%</td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-success" 
+                    onclick="confirmItem('${item.id}', '${item.contactNo}', '${item.nameOfHolders}')" 
+                    ${(!isRoiValid || item.verified) ? 'disabled' : ''}>
+                    ${item.verified ? 'Verified' : !isRoiValid ? 'Add ROI' : 'Confirm'}
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    updatePagination(data.totalPages);
+    updateRange(page * data.content.length + 1, 
+               Math.min((page + 1) * data.content.length, data.totalItems), 
+               data.totalItems);
+}
+        // async function displayData(page) {
+        //     const data = await fetchData(page);
+        //     const tableBody = document.getElementById('tableBody');
+        //     tableBody.innerHTML = '';
+
+        //     data.content.forEach(item => {
+        //         const amount = parseFloat(item.totalAmount);
+        //         const returns = calculateReturns(amount);
                 
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                                     <td>${formatDate(item.date?item.date:item.validTill)}</td>
-                    <td>${item.nameOfHolders}</td>
-                    <td>${item.occupation}</td>
-                    <td>${item.address}</td>
-                    <td>${item.contactNo}</td>
-                    <td>${item.nomineeNameAndAddress}</td>
-                    <td>₹${amount.toLocaleString()}</td>
-                    <td>${item.roi?item.roi:"0"}%</td>
+        //         const row = document.createElement('tr');
+        //         row.innerHTML = `
+        //                              <td>${formatDate(item.date?item.date:item.validTill)}</td>
+        //             <td>${item.nameOfHolders}</td>
+        //             <td>${item.occupation}</td>
+        //             <td>${item.address}</td>
+        //             <td>${item.contactNo}</td>
+        //             <td>${item.nomineeNameAndAddress}</td>
+        //             <td>₹${amount.toLocaleString()}</td>
+        //             <td>${item.roi?item.roi:"0"}%</td>
                    
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
-                    </td>
-                    <td>
-                         <button class="btn btn-sm btn-success" onclick="confirmItem('${item.id}', '${item.contactNo}', '${item.nameOfHolders}')" ${item.verified ? 'disabled' : ''}>
-                             ${item.verified ? 'Verified' : 'Confirm'}
-                                  </button>
-                    </td>
-                    <td>
-                         <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
+        //             <td>
+        //                 <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+        //             </td>
+        //             <td>
+        //                  <button class="btn btn-sm btn-success" onclick="confirmItem('${item.id}', '${item.contactNo}', '${item.nameOfHolders}')" ${item.verified ? 'disabled' : ''}>
+        //                      ${item.verified ? 'Verified' : 'Confirm'}
+        //                           </button>
+        //             </td>
+        //             <td>
+        //                  <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+        //             </td>
+        //         `;
+        //         tableBody.appendChild(row);
+        //     });
 
-            updatePagination(data.totalPages);
-            updateRange(page * data.content.length + 1, 
-                       Math.min((page + 1) * data.content.length, data.totalItems), 
-                       data.totalItems);
-        }
+        //     updatePagination(data.totalPages);
+        //     updateRange(page * data.content.length + 1, 
+        //                Math.min((page + 1) * data.content.length, data.totalItems), 
+        //                data.totalItems);
+        // }
 
         async function editItem(id) { window.location.href=`edituser.html?id=${id}`
         }
