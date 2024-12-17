@@ -187,7 +187,7 @@
                                 <th>Total Amount (₹)</th>
                                 <th>Monthly Returns </th>
                                 
-                                <!-- <th>Edit</th> -->
+                                <th>Edit</th>
                                 
                                 <th>Delete</th>
 
@@ -210,6 +210,60 @@
         </div>
     </div>
 
+    <!-- User Details Modal -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="userDetailsModalLabel">Stakeholder Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="fw-bold">Name(s) of Holder(s):</label>
+                        <p id="modalName"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Occupation:</label>
+                        <p id="modalOccupation"></p>
+                    </div>
+                    <div class="col-12">
+                        <label class="fw-bold">Address:</label>
+                        <p id="modalAddress"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Contact No:</label>
+                        <p id="modalContact"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Date:</label>
+                        <p id="modalDate"></p>
+                    </div>
+                    <div class="col-12">
+                        <label class="fw-bold">Nominee Name & Address:</label>
+                        <p id="modalNominee"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-bold">Total Amount:</label>
+                        <p id="modalAmount"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-bold">Monthly Returns:</label>
+                        <p id="modalReturns"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-bold">Valid Till:</label>
+                        <p id="modalValidTill"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     
  </section>
@@ -426,6 +480,9 @@ async function displayData(page) {
             <td>${item.nomineeNameAndAddress}</td>
             <td>₹${amount.toLocaleString()}</td>
             <td>${item.roi ? item.roi : "0"}%</td>
+             <td>
+                <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+            </td>
             <td>
                 <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
             </td>
