@@ -71,7 +71,8 @@
                                     <li><a href="#special-collection">Special Collection</a></li>
                                     <li><a href="#news">News</a></li>
                                     <li><a href="#contact">Contact us</a></li>
-                                    <li><a href="./stockAllocationForm.html">Stakeholders Certificate</a></li>
+                                    <li><a href="./stockAllocationForm.html">Investor form</a></li>
+                                   <!-- <li><a href="#">View Certificate</a></li> -->
                                     <!-- <li><a href="./login.html">Login</a></li> -->
 
                                 </ul>
@@ -90,15 +91,22 @@
     <!-- end site-header -->
 
     <div id="banner" class="banner full-screen-mode parallax">
+        
         <div class="container pr">
+           
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                
                 <div class="banner-static">
+                    
+               
                     <div class="banner-text">
                         <div class="banner-cell">
-                            <h1> Taste the Legacy of <span class="typer" id="some-id" data-delay="200" data-delim=":"
-                                    data-words="Generations:Flavors:Authentic Spices " data-colors="red"></span><span
-                                    class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
-                            <h2>Spicing Up Traditions Since 1982</h2>
+                            <img src="./images/okfp.png" width="150px" style="position: relative;top:12rem"><br>
+                            <h1 style="font-weight: 800;"> चोखंदळ गृहिणीची पहिली पसंद </h1><br>
+                                <span style="font-size: 35px;font-weight:800" class="typer" id="some-id" data-delay="200" data-delim=":"
+                                    data-words="शुद्ध आहार सकस विचार " data-colors="red"></span><span
+                                    class="cursor" data-cursorDisplay="_" data-owner="some-id"></span>
+                            <h2 class="h2color">Spicing Up Traditions Since 2006</h2>
 
                             <div class="book-btn">
                                 <a href="#specialblock" class="table-btn hvr-underline-from-center">Check our Special
@@ -131,9 +139,9 @@
                         <p class="lead">At Mahalakshmi Masale, we bring tradition, taste, and quality together to create
                             authentic spice blends loved by families across generations. Our journey began with a simple
                             yet powerful vision—to offer pure, high-quality masalas that enrich every meal with flavor
-                            and authenticity.</p>
+                            and authenticity.
 
-                        <p> Mahalakshmi Masale was established with the belief that the essence of great cooking lies in
+                        Mahalakshmi Masale was established with the belief that the essence of great cooking lies in
                             the quality of its ingredients. Our founders, guided by passion and dedication, laid the
                             foundation for a company that would become synonymous with trust and quality. The vision was
                             simple yet profound: to provide families with spice blends that capture the true flavors of
@@ -241,8 +249,8 @@
                     </div>
                     <div class="team-box">
 
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6">
+                        <div class="row" style="display: flex;justify-content:center">
+                            <!--<div class="col-md-4 col-sm-6">
                                 <div class="sf-team">
                                     <div class="thumb">
                                         <a href="#"><img src="images/staff-01.png" alt=""></a>
@@ -255,7 +263,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- end col -->
                             <div class="col-md-4 col-sm-6">
                                 <div class="sf-team">
@@ -278,7 +286,7 @@
                                     </div>
                                     <div class="text-col">
                                         <h3>Punam Balasaheb Hembade</h3>
-                                        <small>From 1995 to today</small>
+                                        <small>From 2010 to today</small>
                                         <p>Current leader of the company.Took charge in 2010.Has modernized the business
                                             operations</p>
 
@@ -301,7 +309,7 @@
     </div>
 
 
-    <div id="news" class="team-main pad-top-100 pad-bottom-100 parallax">
+   <!-- <div id="news" class="team-main pad-top-100 pad-bottom-100 parallax">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -324,8 +332,7 @@
                                             <img src="images/news1.png" alt="" class="img-responsive img-rounded">
                                         </div>
 
-                                    </div><!-- end service -->
-
+                                    </div>
                                     <div class="service-widget">
                                         <div class="post-media wow fadeIn">
                                             <a href="images/news1.png" data-rel="prettyPhoto[gal]"
@@ -333,24 +340,24 @@
                                             <img src="images/news2.png" alt="" class="img-responsive img-rounded">
                                         </div>
 
-                                    </div><!-- end service -->
+                                    </div>
 
                                 </div>
                             </div>
 
                         </div>
-                        <!-- end row -->
+                      
 
                     </div>
-                    <!-- end team-box -->
+                    
 
                 </div>
-                <!-- end col -->
+               
             </div>
-            <!-- end row -->
+            
         </div> 
-        <!-- end container -->
-    </div>
+        
+    </div> -->
 
     <div id="contact" class="reservations-main pad-top-100 pad-bottom-100">
         <div class="container">
@@ -621,7 +628,7 @@
             // Logout Button
             const logoutItem = `
               <li class="nav-item">
-                  <a class="nav-link text-white active" href="./userlist.html">USERLIST</a>
+                  <a class="nav-link text-white active" href="./userlist.html">INVESTOR LIST</a>
                 
                 </li>
                 <li class="nav-item">
@@ -641,6 +648,7 @@
             if (token && message && status) {
                 // If token, message, and status exist, show logout button
                 navbar.innerHTML += logoutItem;
+            
 
                 // Add event listener for logout
                 document.getElementById("logoutBtn").addEventListener("click", function () {
