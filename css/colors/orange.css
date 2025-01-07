@@ -38,8 +38,12 @@
 .offer-item div h3{
 	color: #ED3136;
 }
-.tab-menu .is-active{
-	background: #ED3136;
+.hvr{
+	color: #000000;
+}
+.hvr :hover{
+	background: #ed3137;
+	/* color: aliceblue; */
 }
 .tab-menu .slick-arrow.slick-prev{
 	background: #ED3136 url(../../images/back.png) no-repeat center;
