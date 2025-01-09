@@ -739,33 +739,7 @@
                                     authentic spice blends loved by families across generations. Our journey began with a simple
                                     yet powerful vision—to offer pure, high-quality masalas that enrich every meal with flavor
                                     and authenticity.</p>
-                             <!--   <ul class="socials-box footer-socials pull-left">
-                                    <li>
-                                        <a href="#">
-                                            <div class="social-circle-border"><i class="fa  fa-facebook"></i></div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="social-circle-border"><i class="fa fa-twitter"></i></div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="social-circle-border"><i class="fa fa-google-plus"></i></div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="social-circle-border"><i class="fa fa-pinterest"></i></div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="social-circle-border"><i class="fa fa-linkedin"></i></div>
-                                        </a>
-                                    </li>
-                                </ul> -->
+                            
 
                             </div>
                                                    </div> 
@@ -802,25 +776,7 @@
                                 </p>
                             </div>
                         </div> 
-                        <!-- end col -->
-                        <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="footer-box-d">
-                                <h3>Opening Hours</h3>
-
-                                <ul>
-                                    <li>
-                                        <p>Monday - Thursday </p>
-                                        <span> 11:00 AM - 9:00 PM</span>
-                                    </li>
-                                    <li>
-                                        <p>Friday - Saturday </p>
-                                        <span> 11:00 AM - 5:00 PM</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                        </div> -->
-                        <!-- end col -->
+                       
                     </div>
                     <!-- end footer-in-main -->
                 </div>
@@ -847,17 +803,7 @@
 
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
-   <!-- <section id="color-panel" class="close-color-panel">
-        <a class="panel-button gray2"><i class="fa fa-cog fa-spin fa-2x"></i></a>
-        
-        <div class="segment">
-            <h4 class="gray2 normal no-padding">Color Scheme</h4>
-            <a title="orange" class="switcher orange-bg"></a>
-            <a title="strong-blue" class="switcher strong-blue-bg"></a>
-            <a title="moderate-green" class="switcher moderate-green-bg"></a>
-            <a title="vivid-yellow" class="switcher vivid-yellow-bg"></a>
-        </div>
-    </section> -->
+ 
 
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
@@ -944,24 +890,7 @@
         });
     </script>
 
-<!--<script>
-    function openImageModal(imageSrc) {
-        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        const zoomImage = document.getElementById('zoomImage');
-        zoomImage.src = imageSrc;
-        modal.show();
-    
-        // Add zoom click functionality
-        zoomImage.onclick = function() {
-            this.classList.toggle('zoomed');
-        }
-    }
-    
-    // Close zoom on modal close
-    document.getElementById('imageModal').addEventListener('hidden.bs.modal', function () {
-        document.getElementById('zoomImage').classList.remove('zoomed');
-    });
-    </script> -->
+
     <script>
         document.getElementById('post-update-btn').addEventListener('click', function(event) {
             event.preventDefault();
@@ -1035,31 +964,31 @@
             const visibleUpdates = updates.slice(currentIndex, currentIndex + 3);
         
             visibleUpdates.forEach(update => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-       
-                if (update.newsFileUrls && update.newsFileUrls.length > 0) {
-                    const imageSlider = document.createElement('div');
-                    imageSlider.classList.add('image-slider');
+                    const card = document.createElement('div');
+                    card.classList.add('card');
         
-                    update.newsFileUrls.forEach((url, index) => {
-                        const img = document.createElement('img');
-                        console.log(url,"url")
-                        img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
-                        img.alt = update.newsTitle || 'News Image';
-                        if (index === 0) {
-                            img.classList.add('active');
-                        }
-                        imageSlider.appendChild(img);
-                    });
-        
-                    card.appendChild(imageSlider);
-                    startImageSlider(imageSlider); // Start auto-slider for this image set
-                } else {
-                    const placeholder = document.createElement('p');
-                    placeholder.textContent = 'No Image Available';
-                    card.appendChild(placeholder);
-                }
+                    if (update.newsFileUrls && update.newsFileUrls.length > 0) {
+                        const imageSlider = document.createElement('div');
+                        imageSlider.classList.add('image-slider');
+            
+                        update.newsFileUrls.forEach((url, index) => {
+                            const img = document.createElement('img');
+                           
+                            img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
+                            img.alt = update.newsTitle || 'News Image';
+                            if (index === 0) {
+                                img.classList.add('active');
+                            }
+                            imageSlider.appendChild(img);
+                        });
+            
+                        card.appendChild(imageSlider);
+                        startImageSlider(imageSlider); // Start auto-slider for this image set
+                    } else {
+                        const placeholder = document.createElement('p');
+                        placeholder.textContent = 'No Image Available';
+                        card.appendChild(placeholder);
+                    }
         
                 const title = document.createElement('h2');
                 title.textContent = update.newsTitle || 'No Title';
@@ -1083,6 +1012,7 @@
 // delete button visibility for admin
                  const token = sessionStorage.getItem("token");
                  const deleteButton = document.createElement('button');
+                 const editnewsButton=document.createElement('button');
 if (token ) {
    
     deleteButton.textContent = 'Delete';
@@ -1096,44 +1026,322 @@ if (token ) {
     deleteButton.style.marginTop = '10px';
 
     deleteButton.addEventListener('click', () => deleteUpdate(update.id));
-
+    
+   
     
 } else {
     deleteButton.style.display = 'none';
+    editnewsButton.style.display = 'none';
 }
 
-        
-           
+         // Add edit button
+         const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.style.backgroundColor = '#3498db';
+                editButton.style.color = '#fff';
+                editButton.style.border = 'none';
+                editButton.style.padding = '10px 20px';
+                editButton.style.cursor = 'pointer';
+                editButton.style.marginTop = '10px';
+                editButton.addEventListener('click', () => editUpdate(update));
         
                 card.appendChild(deleteButton);
-            
+                card.appendChild(editButton);
         
                 carousel.appendChild(card);
             });
         }
+           
         
-        async function deleteUpdate(id) {
+        //         card.appendChild(deleteButton);
+            
+        
+        //         carousel.appendChild(card);
+        //     });
+        // }
+        function editUpdate(update) {
+    // Create modal
+    const modal = document.createElement('div');
+    modal.id = 'editModal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '1000';
+
+    const modalContent = document.createElement('div');
+    modalContent.style.backgroundColor = 'white';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.width = '900px';
+    modalContent.style.height = '600px';
+    modalContent.style.overflowY = 'auto';
+    modalContent.style.position = 'relative';
+
+    // Title Section
+    const titleLabel = document.createElement('label');
+    titleLabel.textContent = 'Title:';
+    titleLabel.style.display = 'block';
+    titleLabel.style.marginBottom = '5px';
+    modalContent.appendChild(titleLabel);
+
+    const titleInput = document.createElement('input');
+    titleInput.value = update.newsTitle || '';
+    titleInput.placeholder = 'Update Title';
+    titleInput.style.width = '100%';
+    titleInput.style.padding = '10px';
+    titleInput.style.marginBottom = '15px';
+    modalContent.appendChild(titleInput);
+
+    // Description Section
+    const descLabel = document.createElement('label');
+    descLabel.textContent = 'Description:';
+    descLabel.style.display = 'block';
+    descLabel.style.marginBottom = '5px';
+    modalContent.appendChild(descLabel);
+
+    const descInput = document.createElement('textarea');
+    descInput.value = update.newsDescription || '';
+    descInput.placeholder = 'Update Description';
+    descInput.style.width = '100%';
+    descInput.style.padding = '10px';
+    descInput.style.height = '100px';
+    descInput.style.marginBottom = '15px';
+    modalContent.appendChild(descInput);
+
+    // Current Images Section
+    const imageSection = document.createElement('div');
+    imageSection.style.marginBottom = '20px';
+    
+    const imageLabel = document.createElement('h4');
+    imageLabel.textContent = 'Current Images:';
+    imageSection.appendChild(imageLabel);
+
+    const imageContainer = document.createElement('div');
+    imageContainer.style.display = 'flex';
+    imageContainer.style.flexWrap = 'wrap';
+    imageContainer.style.gap = '10px';
+    imageContainer.style.marginBottom = '20px';
+
+    let currentImages = [...(update.newsFileUrls || [])];
+
+    currentImages.forEach((url, index) => {
+        const imgWrapper = document.createElement('div');
+        imgWrapper.style.position = 'relative';
+        imgWrapper.style.width = '150px';
+
+        const img = document.createElement('img');
+        img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
+        img.alt = `Image ${index + 1}`;
+        img.style.width = '150px';
+        img.style.height = '150px';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '4px';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = '×';
+        removeBtn.style.position = 'absolute';
+        removeBtn.style.top = '5px';
+        removeBtn.style.right = '5px';
+        removeBtn.style.backgroundColor = 'red';
+        removeBtn.style.color = 'white';
+        removeBtn.style.border = 'none';
+        removeBtn.style.borderRadius = '50%';
+        removeBtn.style.width = '25px';
+        removeBtn.style.height = '25px';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.display = 'flex';
+        removeBtn.style.alignItems = 'center';
+        removeBtn.style.justifyContent = 'center';
+
+        removeBtn.onclick = () => {
+            currentImages = currentImages.filter((_, i) => i !== index);
+            imgWrapper.remove();
+        };
+
+        imgWrapper.appendChild(img);
+        imgWrapper.appendChild(removeBtn);
+        imageContainer.appendChild(imgWrapper);
+    });
+
+    imageSection.appendChild(imageContainer);
+    modalContent.appendChild(imageSection);
+
+    // New Image Upload Section
+    const newImageLabel = document.createElement('label');
+    newImageLabel.textContent = 'Add New Images:';
+    newImageLabel.style.display = 'block';
+    newImageLabel.style.marginBottom = '5px';
+    modalContent.appendChild(newImageLabel);
+
+    const imageInput = document.createElement('input');
+    imageInput.type = 'file';
+    imageInput.multiple = true;
+    imageInput.accept = 'image/*';
+    imageInput.style.marginBottom = '20px';
+    modalContent.appendChild(imageInput);
+
+    // Button Container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.gap = '10px';
+    buttonContainer.style.justifyContent = 'flex-end';
+
+    // Save Button
+    const submitButton = document.createElement('button');
+submitButton.textContent = 'Save Changes';
+submitButton.style.backgroundColor = '#ED3136';
+submitButton.style.color = '#fff';
+submitButton.style.border = 'none';
+submitButton.style.padding = '10px 20px';
+submitButton.style.cursor = 'pointer';
+submitButton.style.borderRadius = '4px';
+
+submitButton.addEventListener('click', async () => {
+    // Disable submit button while processing
+    submitButton.disabled = true;
+    submitButton.textContent = 'Saving...';
+    
+    const files = imageInput.files;
+    const newUploadedUrls = [];  // Array to store newly uploaded image URLs
+
+    // First handle new image uploads if any
+    if (files.length > 0) {
+        for (let file of files) {
+            const formData = new FormData();
+            formData.append('files', file);
+
             try {
-                const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/delete/${id}`, {
-                    method: 'DELETE',
+                const uploadResponse = await fetch('https://mahalaxmimirchi.com:8084/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const uploadResult = await uploadResponse.json();
+                console.log('Upload result:', uploadResult);  // Debug log
+                
+                if (uploadResult && uploadResult.length > 0) {
+                    // Add each uploaded file URL to our array
+                    uploadResult.forEach(result => {
+                        if (result.status === 200 && result.fileURL) {
+                            newUploadedUrls.push(result.fileURL);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Error uploading one or more images');
+            }
+        }
+    }
+
+    // Combine existing images (that weren't removed) with newly uploaded ones
+    const finalImageUrls = [...currentImages, ...newUploadedUrls];
+    console.log('Final image URLs:', finalImageUrls);  // Debug log
+
+    // Prepare update data with combined image URLs
+    const updateData = {
+        newsTitle: titleInput.value,
+        newsDescription: descInput.value,
+        newsFileUrls: finalImageUrls
+    };
+
+    console.log('Update payload:', updateData);  // Debug log
+
+    try {
+        const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/update/${update.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        if (response.ok) {
+            alert('News updated successfully');
+            modal.remove();
+            fetchUpdates();
+        } else {
+            const errorData = await response.json();
+            console.error('Update error:', errorData);  // Debug log
+            alert('Error updating news: ' + (errorData.message || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Error updating news:', error);
+        alert('Error updating news: ' + error.message);
+    } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Save Changes';
+    }
+});
+
+    // Close Button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Cancel';
+    closeButton.style.backgroundColor = '#6c757d';
+    closeButton.style.color = '#fff';
+    closeButton.style.border = 'none';
+    closeButton.style.padding = '10px 20px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.borderRadius = '4px';
+    closeButton.addEventListener('click', () => modal.remove());
+
+    buttonContainer.appendChild(closeButton);
+    buttonContainer.appendChild(submitButton);
+    modalContent.appendChild(buttonContainer);
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+        // Function to handle Update News
+        async function updateNews(id, title, description, newImage) {
+            const formData = new FormData();
+            formData.append('newsTitle', title);
+            formData.append('newsDescription', description);
+        
+            // If new image is uploaded, add it to the formData
+            if (newImage) {
+                formData.append('newsFile', newImage);
+            }
+        
+            try {
+                const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/update/${id}`, {
+                    method: 'PUT',
+                    body: formData,
                 });
         
                 if (response.ok) {
-                    alert('Update deleted successfully');
-                    // Remove the deleted update from the list and re-render
-                    updates = updates.filter(update => update.id !== id);
-                    displayUpdates();
+                    alert('News updated successfully');
+                    closeModal();
+                    fetchUpdates(); // Re-fetch updates to display the latest news list
                 } else {
-                    console.error('Failed to delete the update');
+                    console.error('News updated successfully');
                 }
             } catch (error) {
-                console.error('Error deleting the update:', error);
+                console.error('Error updating the news:', error);
             }
         }
         
-       
-        
-       
+        // Close the modal
+        function closeModal() {
+            const modal = document.getElementById('editModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
         
         function startCarouselAutoSlider() {
             setInterval(() => {
@@ -1156,8 +1364,30 @@ if (token ) {
             }, 2000); // Change image every 2 seconds
         }
         
+       
+       
         // Fetch and display the updates on page load
         fetchUpdates();
+
+        // delete 
+        async function deleteUpdate(id) {
+            try {
+                const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/delete/${id}`, {
+                    method: 'DELETE',
+                });
+        
+                if (response.ok) {
+                    alert('Update deleted successfully');
+                    // Remove the deleted update from the list and re-render
+                    updates = updates.filter(update => update.id !== id);
+                    displayUpdates();
+                } else {
+                    console.error('Failed to delete the update');
+                }
+            } catch (error) {
+                console.error('Error deleting the update:', error);
+            }
+        }
         
     </script>
     
