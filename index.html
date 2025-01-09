@@ -1197,7 +1197,7 @@ align-items: center;
     const carousel = document.getElementById('carousel');
     carousel.innerHTML = '';
 
-    const visibleUpdates = updates.slice(currentIndex, currentIndex + 3);
+    const visibleUpdates = updates.slice(currentIndex, currentIndex + 4);
 
     visibleUpdates.forEach(update => {
         const card = document.createElement('div');
@@ -1603,7 +1603,7 @@ submitButton.addEventListener('click', async () => {
         
         function startCarouselAutoSlider() {
             setInterval(() => {
-                currentIndex += 3;
+                currentIndex += 4;
                 if (currentIndex >= updates.length) {
                     currentIndex = 0;
                 }
