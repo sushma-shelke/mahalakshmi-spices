@@ -134,9 +134,11 @@
   }
 
   .delete-button {
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    margin-top: 372px;
+    margin-left: -185px;
     padding: 10px 20px;
-    background-color: red;
+    background-color: #ED3136;
     color: white;
     border: none;
     cursor: pointer;
@@ -1035,13 +1037,14 @@
             visibleUpdates.forEach(update => {
                 const card = document.createElement('div');
                 card.classList.add('card');
-        
+       
                 if (update.newsFileUrls && update.newsFileUrls.length > 0) {
                     const imageSlider = document.createElement('div');
                     imageSlider.classList.add('image-slider');
         
                     update.newsFileUrls.forEach((url, index) => {
                         const img = document.createElement('img');
+                        console.log(url,"url")
                         img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
                         img.alt = update.newsTitle || 'News Image';
                         if (index === 0) {
@@ -1269,12 +1272,13 @@ if (token ) {
               .then(data => {
                 const swiperWrapper = document.getElementById('swiper-wrapper');
                 swiperWrapper.innerHTML = ''; // Clear existing slides
+                const token = sessionStorage.getItem("token");
                 data.forEach(item => {
                   const newSlide = document.createElement('div');
                   newSlide.classList.add('swiper-slide');
                   newSlide.innerHTML = `
                     <img src="${item.imageUrl}" alt="${item.title}" />
-                    <button onclick="deleteImage('${item.id}')" class="delete-button">Delete</button>
+ ${token ? `<button onclick="deleteImage('${item.id}')" class="delete-button">Delete</button>` : ''}
                   `;
                   swiperWrapper.appendChild(newSlide);
                 });
