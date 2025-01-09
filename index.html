@@ -45,45 +45,50 @@
         }
 
         .carousel-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
 
-        .carousel .card {
-            flex: 1 0 calc(33.333% - 10px);
-            box-sizing: border-box;
-            padding: 10px;
-            margin-right: 10px;
-        }
+.carousel .card {
+    flex: 1 0 calc(33.333% - 10px);
+    box-sizing: border-box;
+    padding: 10px;
+    margin-right: 10px;
+    text-align: center; /* Center align the content in the card */
+}
 
-        .carousel .card img {
-            max-width: 100%;
-        }
+.carousel .card img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Prevent distortion */
+    border-radius: 5px; /* Optional: add rounded corners */
+}
 
-        .carousel .card p {
-            margin: 10px 0 0;
-        }
+/* Ensure all images are consistent in height */
+.image-slider img {
+    width: 100%; /* Make the image take up the full width of its container */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Crop the image while keeping the aspect ratio */
+    border-radius: 5px; /* Optional: add rounded corners */
+}
 
-        /* .slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-        } */
+.carousel .card p {
+    margin: 10px 0 0;
+}
 
-        .slider img {
-            max-width: 100%;
-            flex: 0 0 auto;
-            margin-right: 10px;
-        }
-
+/* Optional: Add hover effect for images */
+.carousel .card img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
         .center-items {
             justify-content: center;
         }
@@ -156,7 +161,30 @@
     /* flex-direction: column; */
     /* align-items: center; */
   }
+  .image-slider {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        cursor: pointer;
+    }
 
+    .image-slider img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        display: none;
+    }
+
+    .image-slider img.active {
+        opacity: 1;
+        display: block;
+    } 
 
     </style>
 </head>
@@ -342,7 +370,7 @@
 
     <div class="updates-section">
         <h2 class="block-title text-center" id="special-update">Spices Updates</h2>
-        <div class="carousel-container">
+        <div class="carousel">
             <div id="carousel" class="carousel">
                 <!-- Posted updates will appear here -->
             </div>
@@ -363,7 +391,7 @@
             
             <textarea class="form-box" id="newsDescription" placeholder="Enter a description..."></textarea>
             <div class="reserve-book-btn" style="display: flex;justify-content:center">
-                <button class="btn btn-light btn-radius btn-brd grd1 btn-block" id="post-update-btn" style="width: 30rem;margin-bottom:20px">Upload Image to gallery</button>
+                <button class="btn btn-light btn-radius btn-brd grd1 btn-block" id="post-update-btn" style="width: 30rem;margin-bottom:20px">Upload News and Update</button>
             </div>
             <hr >
            
@@ -709,7 +737,7 @@
             
             <textarea class="form-box" id="imageDescription" placeholder="Enter a description..."></textarea>
             <div class="reserve-book-btn" style="display: flex;justify-content:center">
-                <button class="btn btn-light btn-radius btn-brd grd1 btn-block" id="post-gallery-btn" style="width: 30rem;margin-bottom:20px">Post Update</button>
+                <button class="btn btn-light btn-radius btn-brd grd1 btn-block" id="post-gallery-btn" style="width: 30rem;margin-bottom:20px">Upload Gallery Images</button>
             </div>
             <hr >
            
@@ -919,22 +947,26 @@
         
             // Send the request to the API
             fetch('https://mahalaxmimirchi.com:8084/api/v1/news/create', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('News posted successfully!');
-                    // You can add additional logic here to reset the form or display a success message
-                } else {
-                    alert('Failed to post update. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error posting news:', error);
-                alert('Error posting update. Please try again.');
-            });
+    method: 'POST',
+    body: formData
+})
+    .then(response => response.json())
+    .then(data => {
+        console.log( data, "dataqwqw");
+
+        // Correctly check the status here
+        if (data.status === 200) {
+            alert('News posted successfully!');
+            // You can add additional logic here to reset the form or display a success message
+        } else {
+            alert('Failed to post update. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error posting news:', error);
+        alert('Error posting update. Please try again.');
+    });
+
         });
         </script>
         
@@ -956,39 +988,98 @@
             }
         }
         
-        function displayUpdates() {
-            const carousel = document.getElementById('carousel');
-            carousel.innerHTML = ''; // Clear previous updates
+        // function displayUpdates() {
+        //     const carousel = document.getElementById('carousel');
+        //     carousel.innerHTML = ''; // Clear previous updates
         
-            // Display only 3 updates at a time
-            const visibleUpdates = updates.slice(currentIndex, currentIndex + 3);
+        //     // Display only 3 updates at a time
+        //     const visibleUpdates = updates.slice(currentIndex, currentIndex + 3);
         
-            visibleUpdates.forEach(update => {
-                    const card = document.createElement('div');
-                    card.classList.add('card');
+        //     visibleUpdates.forEach(update => {
+        //             const card = document.createElement('div');
+        //             card.classList.add('card');
         
-                    if (update.newsFileUrls && update.newsFileUrls.length > 0) {
-                        const imageSlider = document.createElement('div');
-                        imageSlider.classList.add('image-slider');
+                    // if (update.newsFileUrls && update.newsFileUrls.length > 0) {
+                    //     const imageSlider = document.createElement('div');
+                    //     imageSlider.classList.add('image-slider');
             
-                        update.newsFileUrls.forEach((url, index) => {
-                            const img = document.createElement('img');
+                    //     update.newsFileUrls.forEach((url, index) => {
+                    //         const img = document.createElement('img');
                            
-                            img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
-                            img.alt = update.newsTitle || 'News Image';
-                            if (index === 0) {
-                                img.classList.add('active');
-                            }
-                            imageSlider.appendChild(img);
-                        });
+                    //         img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
+                    //         img.alt = update.newsTitle || 'News Image';
+                    //         if (index === 0) {
+                    //             img.classList.add('active');
+                    //         }
+                    //         imageSlider.appendChild(img);
+                    //     });
             
-                        card.appendChild(imageSlider);
-                        startImageSlider(imageSlider); // Start auto-slider for this image set
-                    } else {
-                        const placeholder = document.createElement('p');
-                        placeholder.textContent = 'No Image Available';
-                        card.appendChild(placeholder);
-                    }
+                    //     card.appendChild(imageSlider);
+                    //     startImageSlider(imageSlider); // Start auto-slider for this image set
+                    // } else {
+                    //     const placeholder = document.createElement('p');
+                    //     placeholder.textContent = 'No Image Available';
+                    //     card.appendChild(placeholder);
+                    // }
+
+                    function displayUpdates() {
+    const carousel = document.getElementById('carousel');
+    carousel.innerHTML = '';
+
+    const visibleUpdates = updates.slice(currentIndex, currentIndex + 4);
+
+    visibleUpdates.forEach(update => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        if (update.newsFileUrls && update.newsFileUrls.length > 0) {
+            const imageSlider = document.createElement('div');
+            imageSlider.classList.add('image-slider');
+
+            // Split URLs by comma if they're in a string format
+            const urls = Array.isArray(update.newsFileUrls) ? 
+                        update.newsFileUrls : 
+                        update.newsFileUrls.split(',').map(url => url.trim());
+
+            urls.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url.startsWith('http') ? url : `https://mahalaxmimirchi.com/uploads/${url}`;
+                img.alt = update.newsTitle || 'News Image';
+                if (index === 0) {
+                    img.classList.add('active');
+                }
+                imageSlider.appendChild(img);
+            });
+
+            // Add hover functionality
+            let currentIndex = 0;
+            const images = imageSlider.querySelectorAll('img');
+            
+            imageSlider.addEventListener('mouseenter', function() {
+                let hoverInterval = setInterval(() => {
+                    images[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }, 1000); // Change image every second on hover
+
+                imageSlider.addEventListener('mouseleave', function() {
+                    clearInterval(hoverInterval);
+                    // Reset to first image when mouse leaves
+                    images.forEach((img, idx) => {
+                        img.classList.remove('active');
+                        if (idx === 0) img.classList.add('active');
+                    });
+                    currentIndex = 0;
+                });
+            });
+
+            card.appendChild(imageSlider);
+        } else {
+            const placeholder = document.createElement('p');
+            placeholder.textContent = 'No Image Available';
+            card.appendChild(placeholder);
+        }
+
         
                 const title = document.createElement('h2');
                 title.textContent = update.newsTitle || 'No Title';
@@ -1054,12 +1145,7 @@ if (token ) {
         }
            
         
-        //         card.appendChild(deleteButton);
-            
-        
-        //         carousel.appendChild(card);
-        //     });
-        // }
+      
         function editUpdate(update) {
     // Create modal
     const modal = document.createElement('div');
@@ -1346,7 +1432,7 @@ submitButton.addEventListener('click', async () => {
         
         function startCarouselAutoSlider() {
             setInterval(() => {
-                currentIndex += 3;
+                currentIndex += 4;
                 if (currentIndex >= updates.length) {
                     currentIndex = 0;
                 }
