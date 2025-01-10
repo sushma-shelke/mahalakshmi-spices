@@ -37,7 +37,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    
     <style>
 
 .aboutustext{
@@ -100,6 +100,7 @@ align-items: center;
 }
 .aboutuscontainer{
    width: 95vw;
+   margin-top: 30px;
   }
 @media only screen and (max-width: 768px){
   .aboutuscontainer{
@@ -112,13 +113,17 @@ align-items: center;
   }
 }
 .garammasala{
-  width: 780px;
+  /* width: 780px; */
   padding-right:30px ;
   height: 230px;
 }
         .updates-section ,.Gallery-section {
             max-width: 80vw;
             margin: 0 auto;
+        }
+        .Gallery-section {
+            max-width: 95vw;
+            margin: 0px;
         }
 
         .carousel-container {
@@ -132,6 +137,20 @@ align-items: center;
 .carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
+}
+@media only screen and (max-width:480px){
+    .carousel {
+    display: grid;
+    /* transition: transform 0.5s ease-in-out; */
+}
+
+.tab-menu .slick-initialized .slick-slide {
+    outline: none;
+    width: 80% !important;
+}
+.block-title {
+    margin-top: 7rem;
+}
 }
 
 .carousel .card {
@@ -185,11 +204,11 @@ align-items: center;
       border-radius: 20px; /* Rounds the corners of the entire slide container */
     }
     .swiper-slide img {
-      width: 100%;
-      height: auto;
+      /* width: 100%; */
+      /* height: auto; */
       object-fit: cover;
-      max-width: 1902px;
-      max-height: 1080px;
+     width: 98vw;
+      /* max-height: 1080px; */
       border-radius: 20px; /* Rounds the corners of the image */
     }
     /* Custom styles for Swiper navigation arrows */
@@ -399,9 +418,9 @@ align-items: center;
     </div>
 <!--Icon box section starting-->
 
-<div class="container-fluid aboutuscontainer mt-4">
+<div class="container-fluid aboutuscontainer mt-4" >
     <!-- First Row -->
-    <div class="row align-items-center mb-4">
+    <div class="row align-items-center mb-4 mt-5">
         <h2 class="block-title"> Original Mahalakshmi: Elevating Culinary Excellence with Fresh, Authentic, and Sustainable Spices </h2>
       <div class="col-md-9  distance" >
         <!-- Text (3/4 part) -->
@@ -475,11 +494,11 @@ align-items: center;
   <div class="container-fluid  aboutuscontainer">
     <div class="row align-items-center">
       <!-- Image Column -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-4">
         <img src="images/new garam masala.png" alt="Placeholder Image" class="img-fluid garammasala">
       </div>
       <!-- Text Column -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-8">
         <h2>BLENDED SPICES</h2>
         <p class="lead">  At<b> Original Mahalakshmi</b>, we are passionate about bringing the authentic flavors of traditional Indian cuisine to every kitchen. Established with the vision of preserving and sharing the rich culinary heritage of India,
           our expertly crafted blended spices are made from the finest ingredients sourced directly from trusted farmers and suppliers. With years of dedication and expertise, we ensure that each product meets the highest standards of purity,
@@ -914,8 +933,8 @@ align-items: center;
            
         </div>
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <!--<div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div> -->
   </div>
  
 
@@ -1660,7 +1679,7 @@ submitButton.addEventListener('click', async () => {
         slidesPerView: 1,
         spaceBetween: 20,
         autoplay: {
-          delay: 2500,
+          delay: 2000,
           disableOnInteraction: false,
         },
         navigation: {
@@ -1669,7 +1688,7 @@ submitButton.addEventListener('click', async () => {
         },
         breakpoints: {
           1024: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           }
         }
       });

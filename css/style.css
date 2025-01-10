@@ -2312,3 +2312,9 @@ textarea{
   h3, p {
       font-family: 'Lato', sans-serif;
   }
+  .banner-text h1 {
+    font-family: "Kanit", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 65px;
+  }
