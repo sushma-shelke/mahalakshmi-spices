@@ -286,6 +286,59 @@ align-items: center;
         display: block;
     } 
 
+   /* Full-width row container */
+/* Section Wrapper */
+.section {
+  width: 100%;
+  padding-bottom: 4rem; /* Add vertical spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* Title Row */
+.reach-row {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the title horizontally */
+  margin-bottom: 1rem; /* Add spacing below the title */
+}
+
+
+/* Reach Section */
+.reach-section {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f4f4f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Limit width on larger screens */
+}
+
+/* Counter Styling */
+.counter {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin: 1rem 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
     </style>
 </head>
 
@@ -342,7 +395,7 @@ align-items: center;
 
     <div id="banner" class="banner full-screen-mode parallax">
         
-        <div class="container pr">
+        <div class="container">
            
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 
@@ -351,11 +404,12 @@ align-items: center;
                
                     <div class="banner-text">
                         <div class="banner-cell">
-                            <img src="./images/okfp.png" width="150px" style="position: relative;top:12rem"><br>
+                            <img src="./images/okfp.png" width="250px" style="position: relative;top:12rem"><br>
                             <h1>ORGANIC KHANDESHI FOOD PRODUCT</h1><br>
                                 <span style="font-size: 35px;font-weight:800" class="typer" id="some-id" data-delay="200" data-delim=":"
                                     data-words="चोखंदळ गृहिणीची पहिली पसंद " data-colors="red"></span><span
                                     class="cursor" data-cursorDisplay="_" data-owner="some-id"></span>
+                            <h2 class="h2color " style="font-size: 25px;font-weight:900">शुद्ध आहार सकस विचार</h2>
                             <h2 class="h2color">Spicing Up Traditions Since 2006</h2>
 
                             <div class="book-btn">
@@ -424,7 +478,7 @@ align-items: center;
 <div class="container-fluid aboutuscontainer mt-4" >
     <!-- First Row -->
     <div class="row align-items-center mb-4 mt-5">
-        <h2 class="block-title"> Original Mahalakshmi: Elevating Culinary Excellence with Fresh, Authentic, and Sustainable Spices </h2>
+        <h2 class="block-title"> Original Mahalaxmi : Elevating Culinary Excellence with Fresh, Authentic, and Sustainable Spices </h2>
       <div class="col-md-9  distance" >
         <!-- Text (3/4 part) -->
         <p class="lead">At<b> Original Mahakshmi</b>, we believe that freshness is the cornerstone of every spice.
@@ -458,7 +512,7 @@ align-items: center;
           We process our spices with minimal intervention,
           preserving their natural properties and authenticity, while maintaining their rich flavors and aromas.
           Our team works diligently to offer the freshest, most flavorful products, honoring both tradition and sustainability in every step.
-          At “Original Mahalakshmi,” we are dedicated to excellence. Through our commitment to quality,
+          At <b>“Original Mahalaxmi”</b> we are dedicated to excellence. Through our commitment to quality,
            sustainability, and respect for nature, we aim to make our name synonymous with the very best in the spice industry.
            Each product we offer tells a story of care, respect, and the tradition of nurturing the Earth’s bounty.</p>
       </div>
@@ -477,7 +531,7 @@ align-items: center;
            its natural aroma, color, and nutritional value, ensuring an unmatched culinary experience.
           With a commitment to purity and freshness,
           our single spices are perfect for enhancing the taste of your everyday meals or creating elaborate dishes.
-          At Original Mahalakshmi, we believe in celebrating the essence of Indian cooking by delivering spices that stay true to their origins.
+          At <b>Original Mahalaxmi</b>, we believe in celebrating the essence of Indian cooking by delivering spices that stay true to their origins.
            Trust us to bring you the genuine flavors that make your meals not just delicious but also wholesome and memorable.</p>
       </div>
       <div class="col-md-3 distance">
@@ -491,7 +545,7 @@ align-items: center;
            preservatives, or fillers, ensuring that you receive only the purest form of nature's bounty. We work closely with farmers
            and suppliers to promote ethical sourcing and environmentally friendly practices. With every pack of our ground single spices,
             you’re not just enhancing your meals but also contributing to a healthier lifestyle and a better planet.
-           Let Original Mahalakshmi be your partner in crafting dishes that bring joy, flavor, and authenticity to every table.</p>
+           Let <b>Original Mahalaxmi</b> be your partner in crafting dishes that bring joy, flavor, and authenticity to every table.</p>
       </div>
   </div>
   <div class="container-fluid  aboutuscontainer">
@@ -503,7 +557,7 @@ align-items: center;
       <!-- Text Column -->
       <div class="col-12 col-md-8">
         <h2>BLENDED SPICES</h2>
-        <p class="lead">  At<b> Original Mahalakshmi</b>, we are passionate about bringing the authentic flavors of traditional Indian cuisine to every kitchen. Established with the vision of preserving and sharing the rich culinary heritage of India,
+        <p class="lead">  At<b> Original Mahalaxmi</b>, we are passionate about bringing the authentic flavors of traditional Indian cuisine to every kitchen. Established with the vision of preserving and sharing the rich culinary heritage of India,
           our expertly crafted blended spices are made from the finest ingredients sourced directly from trusted farmers and suppliers. With years of dedication and expertise, we ensure that each product meets the highest standards of purity,
           quality, and taste, providing a delightful experience for every meal.</p>
         </div>
@@ -511,7 +565,7 @@ align-items: center;
         Our blends are a harmonious mix of tradition and innovation, designed to cater to the diverse tastes of modern households.
         Whether it’s the warmth of a garam masala, the vibrant aroma of a biryani blend, or the zest of a chaat masala,
         each spice is crafted with care to preserve its natural essence.
-        At Original Mahalakshmi, we don’t just sell spices; we deliver the essence of love, culture, and authenticity that transforms your cooking into an extraordinary culinary journey. Trust us to bring the taste of India into your home, one spice at a time.
+        At <b>Original Mahalaxmi</b>, we don’t just sell spices; we deliver the essence of love, culture, and authenticity that transforms your cooking into an extraordinary culinary journey. Trust us to bring the taste of India into your home, one spice at a time.
     </div>
     </div>
   </div>
@@ -561,7 +615,17 @@ align-items: center;
         <!-- end container -->
     </div>
     <!-- end menu -->
-
+<div class="section">
+    <div class="reach-row">
+        <h2 class="block-title text-center" >Reach - More than 1 lakh families per month</h2>
+    </div>
+        <div class="">
+            <!-- <h2 class="block-title text-center">Reach - More than 1 lac families per month</h2> -->
+          <div class="counter block-title text-center" id="counter">0</div>
+        </div>
+    </div>
+      
+       
     <div class="updates-section" id="news">
         <h2 class="block-title text-center" id="special-update">Spices Updates</h2>
         <div class="carousel">
@@ -744,14 +808,14 @@ align-items: center;
                 <!-- end col -->
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                     <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                        <h2 class="block-title"> Punam Balasaheb Hembade</h2>
+                        <h2 class="block-title"> Poonam Balasaheb Hembade</h2>
 
-                        <h2>From 2010 to today</h2>
-                        <p class="lead"> Smt. Poonam Hembade learned the art of making original Mahalaxmi Mirchi spices, along with the nuances of teamwork and supporting local, needy, and illiterate women, from her mother, Mrs. Babybai Hembade, during her childhood. In 2010, she officially took over the Mahalaxmi Mirchi Spices business and began her entrepreneurial journey.</p>
+                        <h2 style="line-height: 15px;">Original mahalaxmi mirchi masale was started as cottage industry by her mother bebibai in year 2006 and officially poonam  took charge of it on 2010</h2>
+                        <p class="lead"> Smt. Poonam Hembade learned the art of making <b>Original Mahalaxmi</b> Mirchi spices, along with the nuances of teamwork and supporting local, needy, and illiterate women, from her mother, Mrs. Babybai Hembade, during her childhood. In 2010, she officially took over the Mahalaxmi Mirchi Spices business and began her entrepreneurial journey.</p>
 
                         <p class="lead"> Embracing the digital age, Smt. Poonam Hembade has modernized operations, handling everything from order management to feedback and salary payments online. She has upheld a commitment to social welfare, focusing on providing employment opportunities to women, even selling goods at a no-profit, no-loss basis to support local women. Special preference is given to widows, abandoned women, and women from lower castes, promoting inclusivity and empowerment.</p>
                             
-                        <p class="lead">  The original Mahalaxmi Mirchi spices, crafted using the traditional Khandeshi method, are renowned for their quality. This is achieved through the home method of spice preparation, maximizing the use of handmade materials, conserving electricity, and using fresh, coarse spices, ensuring a superior product at competitive prices.</p>
+                        <p class="lead">  The <b>Original Mahalaxmi</b> Mirchi spices, crafted using the traditional Khandeshi method, are renowned for their quality. This is achieved through the home method of spice preparation, maximizing the use of handmade materials, conserving electricity, and using fresh, coarse spices, ensuring a superior product at competitive prices.</p>
                             
                         <p class="lead">   Under her leadership, the business has adapted to modern requirements by registering on the GeM (Government e-Marketplace) portal, developing technology for e-tenders, and facilitating global deliveries through the website. Additionally, she has introduced an Android application to ensure transparency in worker attendance, salaries, and other operational aspects, along with an application for tracking sold goods and sales activities. This blend of tradition and modernization has solidified the brand's commitment to quality and social responsibility. </p>
 
@@ -1139,7 +1203,7 @@ align-items: center;
             }
         
             // Send the request to the API
-            fetch('https://mahalaxmimirchi.com:8084/api/v1/news/create', {
+            fetch('https://originalmahalaxmi.com:8084/api/v1/news/create', {
     method: 'POST',
     body: formData
 })
@@ -1169,7 +1233,7 @@ align-items: center;
         
         async function fetchUpdates() {
             try {
-                const response = await fetch('https://mahalaxmimirchi.com:8084/api/v1/news/list');
+                const response = await fetch('https://originalmahalaxmi.com:8084/api/v1/news/list');
                 updates = await response.json();
         
                 // Initially load the first set of updates
@@ -1497,7 +1561,7 @@ submitButton.addEventListener('click', async () => {
             formData.append('files', file);
 
             try {
-                const uploadResponse = await fetch('https://mahalaxmimirchi.com:8084/upload', {
+                const uploadResponse = await fetch('https://originalmahalaxmi.com:8084/upload', {
                     method: 'POST',
                     body: formData
                 });
@@ -1534,7 +1598,7 @@ submitButton.addEventListener('click', async () => {
     console.log('Update payload:', updateData);  // Debug log
 
     try {
-        const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/update/${update.id}`, {
+        const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/news/update/${update.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -1598,7 +1662,7 @@ submitButton.addEventListener('click', async () => {
             }
         
             try {
-                const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/update/${id}`, {
+                const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/news/update/${id}`, {
                     method: 'PUT',
                     body: formData,
                 });
@@ -1652,7 +1716,7 @@ submitButton.addEventListener('click', async () => {
         // delete 
         async function deleteUpdate(id) {
             try {
-                const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/news/delete/${id}`, {
+                const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/news/delete/${id}`, {
                     method: 'DELETE',
                 });
         
@@ -1699,7 +1763,7 @@ submitButton.addEventListener('click', async () => {
       // Fetch images from the gallery API
       async function fetchImages() {
         try {
-          const response = await fetch('https://mahalaxmimirchi.com:8084/api/v1/gallery/list');
+          const response = await fetch('https://originalmahalaxmi.com:8084/api/v1/gallery/list');
           const data = await response.json();
           
           if (data && data.images) {
@@ -1724,7 +1788,7 @@ submitButton.addEventListener('click', async () => {
       // Delete image using API
       async function deleteImage(id) {
         try {
-          const response = await fetch(`https://mahalaxmimirchi.com:8084/api/v1/gallery/delete/${id}`, {
+          const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/gallery/delete/${id}`, {
             method: 'DELETE',
           });
           if (response.ok) {
@@ -1746,7 +1810,7 @@ submitButton.addEventListener('click', async () => {
           formData.append('image', file);
   
           try {
-            const response = await fetch('https://mahalaxmimirchi.com:8084/api/v1/gallery/upload', {
+            const response = await fetch('https://originalmahalaxmi.com:8084/api/v1/gallery/upload', {
               method: 'POST',
               body: formData,
             });
@@ -1773,7 +1837,7 @@ submitButton.addEventListener('click', async () => {
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          const apiUrl = "https://mahalaxmimirchi.com:8084/api/v1/gallery";
+          const apiUrl = "https://originalmahalaxmi.com:8084/api/v1/gallery";
       
           // Function to fetch and display images
           function fetchImages() {
@@ -1842,7 +1906,26 @@ submitButton.addEventListener('click', async () => {
           fetchImages();
         });
       </script>
-      
+       <script>
+        // Counter Animation Script
+        const counterElement = document.getElementById('counter');
+        let count = 0;
+        const target = 100000;
+    
+        const increment = target / 100; // Adjust speed by increasing/decreasing division
+    
+        const updateCounter = () => {
+          count += increment;
+          if (count < target) {
+            counterElement.textContent = Math.floor(count).toLocaleString(); // Adds commas
+            requestAnimationFrame(updateCounter);
+          } else {
+            counterElement.textContent = target.toLocaleString(); // Final value
+          }
+        };
+    
+        updateCounter();
+      </script>
 </body>
 
 </html>
