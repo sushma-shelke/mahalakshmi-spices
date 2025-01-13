@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Certificate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+
+    h1 {
+      color: #9C2946;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: white;
+      background-color: #9C2946;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #7b2137;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Certificate Verification</h1>
+  <form id="verifyForm">
+    <input type="text" id="certificateNo" placeholder="Enter Certificate Number" required />
+    <button type="submit">Verify</button>
+  </form>
+  <div id="error" class="error"></div>
+  <table id="certificateTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    document.getElementById('verifyForm').addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent form submission
+      const certificateNo = document.getElementById('certificateNo').value.trim();
+      const errorDiv = document.getElementById('error');
+      const table = document.getElementById('certificateTable');
+      const tableBody = table.querySelector('tbody');
+      
+      errorDiv.textContent = ''; // Clear any previous error messages
+      table.style.display = 'none'; // Hide the table initially
+      tableBody.innerHTML = ''; // Clear the table content
+
+      if (!certificateNo) {
+        errorDiv.textContent = 'Please enter a certificate number.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/verifycertificate?certificateNo=${certificateNo}`);
+        if (!response.ok) {
+          throw new Error(`API returned status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // Check if a valid response is received
+        if (!data || Object.keys(data).length === 0) {
+          errorDiv.textContent = 'No data found for the given certificate number.';
+          return;
+        }
+
+        // Populate the table with the API response data
+        for (const [key, value] of Object.entries(data)) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${key}</td>
+            <td>${value !== null ? value : 'N/A'}</td>
+          `;
+          tableBody.appendChild(row);
+        }
+
+        // Display the table
+        table.style.display = 'table';
+      } catch (error) {
+        errorDiv.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
