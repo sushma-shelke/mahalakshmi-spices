@@ -182,6 +182,7 @@ a,
     color: #767676;
     margin: 0;
     padding: 0;
+    text-align: justify;
 }
 
 blockquote {
@@ -1702,6 +1703,7 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 	font-size: 14px;
 	font-family: 'Roboto', sans-serif;
 	color:#ffffff;
+  text-align: justify;
 	line-height: 25px;
 }
 
