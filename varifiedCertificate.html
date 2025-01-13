@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-/>
-<!-- Basic -->
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<!-- Mobile Metas -->
-<meta
-  name="viewport"
-  content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0"
-/>
-<title>Verify Certificate</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
 <!-- Site Icons -->
 <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
-<link rel="apple-touch-icon" href="images/logo.png" />
+<link rel="apple-touch-icon" href="images/logo.png">
+    <!-- Site Metas -->
+    <title>Mahalaxmi Masala</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<!-- Site CSS -->
-<link rel="stylesheet" href="css/style.css" />
-<!-- Responsive CSS -->
-<link rel="stylesheet" href="css/responsive.css" />
-<!-- color -->
-<link
-  id="changeable-colors"
-  rel="stylesheet"
-  href="css/colors/orange.css"
-/>
-<script
-  src="https://kit.fontawesome.com/b27d57f29f.js"
-  crossorigin="anonymous"
-></script>
-  <style>
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="css/colors/orange.css" />
+
+    <!-- Modernizer -->
+    <script src="js/modernizer.js"></script>
+
+</head>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
+      background-color: #f8f9fa;
     }
-
-    h1 {
-      color: #9C2946;
+    /* .form-container {
+      max-width: 80%;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 20px;
+    } */
+    #site-header {
+    background-color: black;
+}
+h1 {
+      color: #ED3136;
       text-align: center;
       margin-bottom: 1rem;
+      font-size: xx-large;
+      padding-top: 15px;
     }
 
     form {
@@ -61,8 +70,8 @@
     }
 
     input {
-      padding: 0.5rem;
-      font-size: 1rem;
+      padding: 1rem;
+      font-size: 1.5rem;
       margin-right: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -70,9 +79,9 @@
 
     button {
       padding: 0.5rem 1rem;
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: white;
-      background-color: #9C2946;
+      background-color: #ED3136;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -86,6 +95,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
+      background-color: #fff;
     }
 
     th, td {
@@ -103,21 +113,22 @@
       text-align: center;
       margin-top: 1rem;
     }
+   
   </style>
-  
-  <script src="https://kit.fontawesome.com/b27d57f29f.js" crossorigin="anonymous"></script>
-</head>
+    <script src="https://kit.fontawesome.com/b27d57f29f.js" crossorigin="anonymous"></script>
 <body>
+    <div id="loader">
+        <div id="status"></div>
+    </div>
     <div id="site-header">
-        <header id="header" class="header-block-top">
+        <header id="header">
             <div class="container">
                 <div class="row">
                     <div class="main-menu">
                         <!-- navbar -->
                         <nav class="navbar navbar-default" id="mainNav">
                             <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                     <span class="sr-only">Toggle navigation</span>
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
@@ -131,16 +142,16 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="active"><a href="#banner">Home</a></li>
-                                    <li><a href="#about">About us</a></li>
-                                    <li><a href="#special-collection">Special Collection</a></li>
-                                    <li><a href="#news">News</a></li>
-                                    <li><a href="#contact">Contact us</a></li>
-                                    <li><a href="./stockAllocationForm.html">Investor form</a></li>
-                                    <li><a href="./varifiedCertificate.html">Certificate Verification</a></li>
-                                   <!-- <li><a href="#">View Certificate</a></li> -->
-                                   <!--  <li><a href="./login.html">Login</a></li> -->
-
+                                    <li ><a href="./index.html">HOME</a></li> 
+                                    <li ><a href="index.html#about">ABOUT</a></li>
+                                    <li ><a href="index.html#special-collection">SPECIAL COLLECTION</a></li>
+                                    <li ><a href="index.html#our_team">NEWS</a></li>
+                                    <li ><a href="index.html#contact">CONTACT</a></li>
+                                    <li ><a href="./stockAllocationForm.html">INVESTOR FORM</a></li>
+                                    <li class="active"><a href="./varifiedCertificate.html">Certificate Verify</a></li>
+                                    <!--<li><a href="#">View Certificate</a></li>-->
+                                    <!-- <li><a href="./login.html">Login</a></li> -->
+                                 
                                 </ul>
                             </div>
                             <!-- end nav-collapse -->
@@ -154,111 +165,207 @@
         </header>
         <!-- end header -->
     </div>
-  <h1>Certificate Verification</h1>
-  <form id="verifyForm">
-    <input type="text" id="certificateNo" placeholder="Enter Certificate Number" required />
-    <button type="submit">Verify</button>
-  </form>
-  <div id="error" class="error"></div>
-  <table id="certificateTable" style="display: none;">
-    <thead>
-      <tr>
-        <th>Key</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+	<!-- end site-header -->
+     <div class="container-fluid">
+    <h1>Certificate Verification</h1>
+    <form id="verifyForm">
+      <input type="text" id="certificateNo" placeholder="Enter Certificate Number" required />
+      <button type="submit">Verify</button>
+    </form>
+    <div id="error" class="error"></div>
+    <table id="certificateTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+</div>
+        <!-- end footer-news -->
+        <div id="footer" class="footer-main">
 
-  <script>
-   document.getElementById('verifyForm').addEventListener('submit', async (event) => {
-  event.preventDefault(); // Prevent form submission
-  const certificateNo = document.getElementById('certificateNo').value.trim();
-  const errorDiv = document.getElementById('error');
-  const table = document.getElementById('certificateTable');
-  const tableBody = table.querySelector('tbody');
+          <div class="footer-box pad-top-70">
+              <div class="container">
+                  <div class="row">
+                      <div class="footer-in-main">
+                          <div class="footer-logo">
+                              <div class="text-center">
+                                  <img src="images/logo.png" alt="" />
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="footer-box-a">
+                                  <h3>About Us</h3>
+                                  <p>We Organic khandeshi food products through our reputed brand "original mahalaxmi", we bring tradition, taste, and quality together to create
+                                      authentic spice blends loved by families across generations. Our journey began with a simple
+                                      yet powerful vision—to offer pure, high-quality masalas that enrich every meal with flavor
+                                      and authenticity.</p>
+                           
+  
+                              </div>
+                                                     </div> 
+                          <!-- end col -->
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                              <div class="footer-box-b">
+                                  <h3>Useful Links</h3>
+                                  <ul>
+                                    
+                                      <li><a href="index.html#about">About us</a></li>
+                                      <li><a href="index.html#special-collection">Special Collection</a></li>
+                                      <li><a href="index.html#news">News</a></li>
+                                      <li><a href="index.html#contact">Contact us</a></li>
+                                  </ul>
+                              </div>
+                           </div> 
+                          <!-- end col -->
+                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                              <div class="footer-box-c">
+                                  <h3>Contact Us</h3>
+                                  <p>
+                                      <i class="fa fa-map-signs" aria-hidden="true"></i>
+                                      <span>D-112, M.I.D.C., Jalgaon  </span>
+                                  </p>
+                                  <p>
+                                      <i class="fa fa-mobile" aria-hidden="true"></i>
+                                      <span>
+                                          +91 7498211029
+                                      </span>
+                                  </p>
+                                  <p>
+                                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                                      <span><a href="#">originalmahalaxmi@gmail.com</a></span>
+                                  </p>
+                              </div>
+                          </div> 
+                         
+                      </div>
+                      <!-- end footer-in-main -->
+                  </div>
+                  <!-- end row -->
+              </div>
+              <!-- end container -->
+              <div id="copyright" class="copyright-main">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <h6 class="copy-title">  Copyright &copy; Original Mahalaxmi Masale <a href="#"
+                                      target="_blank"></a> </h6>
+                          </div>
+                      </div>
+                      <!-- end row -->
+                  </div>
+                  <!-- end container -->
+              </div>
+              <!-- end copyright-main -->
+          </div>
+          <!-- end footer-box -->
+      </div>
+        <!-- end footer-box -->
+    </div>
+    <!-- end footer-main -->
 
-  errorDiv.textContent = ''; // Clear any previous error messages
-  table.style.display = 'none'; // Hide the table initially
-  tableBody.innerHTML = ''; // Clear the table content
+    <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
-  if (!certificateNo) {
-    errorDiv.textContent = 'Please enter a certificate number.';
-    return;
-  }
+  
 
-  try {
-    const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/verifycertificate?certificateNo=${certificateNo}`);
-    if (!response.ok) {
-      throw new Error(`API returned status: ${response.status}`);
-    }
-    const data = await response.json();
-
-    // Check if a valid response is received
-    if (!data || Object.keys(data).length === 0) {
-      errorDiv.textContent = 'No data found for the given certificate number.';
-      return;
-    }
-
-    // Mapping for user-friendly key titles
-    const keyMapping = {
-      id: "Certificate ID",
-      certificateNo: "Certificate Number",
-      date: "Issue Date",
-      nameOfHolders: "Holder's Name",
-      occupation: "Occupation",
-      address: "Address",
-      contactNo: "Contact Number",
-      nomineeNameAndAddress: "Nominee Name & Address",
-      totalAmount: "Total Amount",
-      validTill: "Valid Till",
-      place: "Place of Issue",
-      certificateURL: "Certificate URL",
-      roi: "Rate of Interest",
-      verified: "Verified Status"
-    };
-
-    // Set table title
-    const tableTitle = document.createElement('caption');
-    tableTitle.textContent = "Certificate Details";
-    tableTitle.style.fontWeight = "bold";
-    tableTitle.style.fontSize = "1.2rem";
-    tableTitle.style.color = "#9C2946";
-    table.appendChild(tableTitle);
-
-    // Populate the table with user-friendly keys and values
-    for (const [key, value] of Object.entries(data)) {
-      if (keyMapping[key]) { // Check if the key has a mapped title
-        const row = document.createElement('tr');
-
-        // Handle the "verified" field with icons
-        if (key === 'verified') {
-          const verifiedIcon = value
-            ? '<i class="fa-solid fa-circle-check" style="color: green;"></i> Verified'
-            : '<i class="fa-solid fa-circle-xmark" style="color: red;"></i> Not Verified';
-
-          row.innerHTML = `
-            <td>${keyMapping[key]}</td>
-            <td>${verifiedIcon}</td>
-          `;
-        } else {
-          row.innerHTML = `
-            <td>${keyMapping[key]}</td>
-            <td>${value !== null ? value : 'N/A'}</td>
-          `;
-        }
-
-        tableBody.appendChild(row);
-      }
-    }
-
-    // Display the table
-    table.style.display = 'table';
-  } catch (error) {
-    errorDiv.textContent = `Error: ${error.message}`;
-  }
-});
-
-  </script>
+    <!-- ALL JS FILES -->
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('verifyForm').addEventListener('submit', async (event) => {
+       event.preventDefault(); // Prevent form submission
+       const certificateNo = document.getElementById('certificateNo').value.trim();
+       const errorDiv = document.getElementById('error');
+       const table = document.getElementById('certificateTable');
+       const tableBody = table.querySelector('tbody');
+     
+       errorDiv.textContent = ''; // Clear any previous error messages
+       table.style.display = 'none'; // Hide the table initially
+       tableBody.innerHTML = ''; // Clear the table content
+     
+       if (!certificateNo) {
+         errorDiv.textContent = 'Please enter a certificate number.';
+         return;
+       }
+     
+       try {
+         const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/verifycertificate?certificateNo=${certificateNo}`);
+         if (!response.ok) {
+           throw new Error(`API returned status: ${response.status}`);
+         }
+         const data = await response.json();
+     
+         // Check if a valid response is received
+         if (!data || Object.keys(data).length === 0) {
+           errorDiv.textContent = 'No data found for the given certificate number.';
+           return;
+         }
+     
+         // Mapping for user-friendly key titles
+         const keyMapping = {
+           id: "Certificate ID",
+           certificateNo: "Certificate Number",
+           date: "Issue Date",
+           nameOfHolders: "Holder's Name",
+           occupation: "Occupation",
+           address: "Address",
+           contactNo: "Contact Number",
+           nomineeNameAndAddress: "Nominee Name & Address",
+           totalAmount: "Total Amount",
+           validTill: "Valid Till",
+           place: "Place of Issue",
+           certificateURL: "Certificate URL",
+           roi: "Rate of Interest",
+           verified: "Verified Status"
+         };
+     
+         // Set table title
+         const tableTitle = document.createElement('caption');
+         // tableTitle.textContent = "Certificate Details";
+         tableTitle.style.fontWeight = "bold";
+         tableTitle.style.fontSize = "1.2rem";
+         tableTitle.style.color = "#9C2946";
+         table.appendChild(tableTitle);
+     
+         // Populate the table with user-friendly keys and values
+         for (const [key, value] of Object.entries(data)) {
+           if (keyMapping[key]) { // Check if the key has a mapped title
+             const row = document.createElement('tr');
+     
+             // Handle the "verified" field with icons
+             if (key === 'verified') {
+               const verifiedIcon = value
+                 ? '<i class="fa-solid fa-circle-check" style="color: green;font-size: 2rem;"></i> Verified'
+                 : '<i class="fa-solid fa-circle-xmark" style="color: red;font-size: 2rem;"></i> Not Verified';
+     
+               row.innerHTML = `
+                 <td>${keyMapping[key]}</td>
+                 <td>${verifiedIcon}</td>
+               `;
+             } else {
+               row.innerHTML = `
+                 <td>${keyMapping[key]}</td>
+                 <td>${value !== null ? value : 'N/A'}</td>
+               `;
+             }
+     
+             tableBody.appendChild(row);
+           }
+         }
+     
+         // Display the table
+         table.style.display = 'table';
+       } catch (error) {
+         errorDiv.textContent = `Error: ${error.message}`;
+       }
+     });
+     
+       </script>
 </body>
+
 </html>
