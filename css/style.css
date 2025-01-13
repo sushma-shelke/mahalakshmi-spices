@@ -306,7 +306,7 @@ html, body{ height: 100%; }
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 1.6px;
+    letter-spacing: 1px;
 	position:relative;
 	-webkit-transition: color 0.4s;
     transition: color 0.4s;
@@ -942,7 +942,7 @@ html, body{ height: 100%; }
 
 .sf-team{
 	float: left;
-    width: 100%;
+    width: 90%;
 }
 .sf-team .thumb {
     float: left;
