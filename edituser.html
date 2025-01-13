@@ -315,7 +315,7 @@
       async function fetchUserData() {
         try {
           const response = await fetch(
-            `https://mahalaxmimirchi.com:8084/api/v1/${userId}`
+            `https://originalmahalaxmi.com:8084/api/v1/${userId}`
           );
           if (!response.ok) throw new Error("Failed to fetch data");
           const data = await response.json();
@@ -374,7 +374,7 @@
 
         try {
           const response = await fetch(
-            `https://mahalaxmimirchi.com:8084/api/v1/admin/edit/${userId}`,
+            `https://originalmahalaxmi.com:8084/api/v1/admin/edit/${userId}`,
             {
               method: "PUT",
               headers: {
