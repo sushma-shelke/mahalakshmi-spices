@@ -279,7 +279,7 @@ html, body{ height: 100%; }
 .main-menu{}
 .header-block-top .navbar-brand {
     margin: 0 !important;
-    padding: 15px 0 15px;
+    padding: 10px 0 15px;
     display: inline-block;
     line-height: normal;
     font-size: 100%;
