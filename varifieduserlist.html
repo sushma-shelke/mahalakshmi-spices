@@ -118,7 +118,7 @@
                     <div class="col-12 d-flex justify-content-between align-items-center">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="images/logo.png" alt="Mahalaxmi Logo" style="max-height: 60px; margin: 10px;">
+                                <img src="images/logo-removebg-preview.png" alt="Mahalaxmi Logo" style="max-height: 60px; margin: 10px;">
                             </a>
                         </div>
                         <div class="main-menu">
@@ -201,6 +201,7 @@
                                 <th>Edit</th>
                                 
                                 <th>Delete</th>
+                                <th>Download</th>
 
                             </tr>
                         </thead>
@@ -483,22 +484,28 @@ async function displayData(page) {
         
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${formatDate(item.date ? item.date : item.validTill)}</td>
-            <td>${item.nameOfHolders}</td>
-            <td>${item.occupation}</td>
-            <td>${item.address}</td>
-            <td>${item.contactNo}</td>
-            <td>${item.nomineeNameAndAddress}</td>
-            <td>₹${amount.toLocaleString()}</td>
-            <td>${item.roi ? item.roi : "0"}%</td>
-             <td>
-                <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
-            </td>
-            <td>
-                <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
-            </td>
-        `;
-        tableBody.appendChild(row);
+    <td>${formatDate(item.date ? item.date : item.validTill)}</td>
+    <td>${item.nameOfHolders}</td>
+    <td>${item.occupation}</td>
+    <td>${item.address}</td>
+    <td>${item.contactNo}</td>
+    <td>${item.nomineeNameAndAddress}</td>
+    <td>₹${amount.toLocaleString()}</td>
+    <td>${item.roi ? item.roi : "0"}%</td>
+    <td>
+        <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+    </td>
+    <td>
+        <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+    </td>
+    <td>
+         <button class="btn btn-sm btn-success" onclick="downloadCertificate('${item.certificateURL}')">Download</button>
+    </td>
+
+`;
+tableBody.appendChild(row);
+
+
     });
 
     updatePagination(data.totalPages);
@@ -507,6 +514,36 @@ async function displayData(page) {
         Math.min((page + 1) * 10, data.totalItems),
         data.totalItems
     );
+}
+
+function downloadCertificate(url) {
+  if (!url) {
+    alert("Certificate URL not available.");
+    return;
+  }
+
+  // Fetch the file and create a blob for downloading
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.blob();
+    })
+    .then(blob => {
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = url.split("/").pop(); // Extract the file name from the URL
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl); // Clean up the object URL
+    })
+    .catch(error => {
+      console.error("Failed to download file:", error);
+      alert("Failed to download the certificate. Please try again.");
+    });
 }
 
     async function editItem(id) { window.location.href=`edituser.html?id=${id}`
