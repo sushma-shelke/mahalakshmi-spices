@@ -3,7 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verify Certificate</title>
+
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<!-- Basic -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Mobile Metas -->
+<meta
+  name="viewport"
+  content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0"
+/>
+<title>Verify Certificate</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<!-- Site Icons -->
+<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+<link rel="apple-touch-icon" href="images/logo.png" />
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<!-- Site CSS -->
+<link rel="stylesheet" href="css/style.css" />
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="css/responsive.css" />
+<!-- color -->
+<link
+  id="changeable-colors"
+  rel="stylesheet"
+  href="css/colors/orange.css"
+/>
+<script
+  src="https://kit.fontawesome.com/b27d57f29f.js"
+  crossorigin="anonymous"
+></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,8 +104,56 @@
       margin-top: 1rem;
     }
   </style>
+  
+  <script src="https://kit.fontawesome.com/b27d57f29f.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div id="site-header">
+        <header id="header" class="header-block-top">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <!-- navbar -->
+                        <nav class="navbar navbar-default" id="mainNav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="logo">
+                                    <a class="navbar-brand js-scroll-trigger logo-header" href="#">
+                                        <img src="images/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="active"><a href="#banner">Home</a></li>
+                                    <li><a href="#about">About us</a></li>
+                                    <li><a href="#special-collection">Special Collection</a></li>
+                                    <li><a href="#news">News</a></li>
+                                    <li><a href="#contact">Contact us</a></li>
+                                    <li><a href="./stockAllocationForm.html">Investor form</a></li>
+                                    <li><a href="./varifiedCertificate.html">Certificate Verification</a></li>
+                                   <!-- <li><a href="#">View Certificate</a></li> -->
+                                   <!--  <li><a href="./login.html">Login</a></li> -->
+
+                                </ul>
+                            </div>
+                            <!-- end nav-collapse -->
+                        </nav>
+                        <!-- end navbar -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </header>
+        <!-- end header -->
+    </div>
   <h1>Certificate Verification</h1>
   <form id="verifyForm">
     <input type="text" id="certificateNo" placeholder="Enter Certificate Number" required />
@@ -85,51 +171,94 @@
   </table>
 
   <script>
-    document.getElementById('verifyForm').addEventListener('submit', async (event) => {
-      event.preventDefault(); // Prevent form submission
-      const certificateNo = document.getElementById('certificateNo').value.trim();
-      const errorDiv = document.getElementById('error');
-      const table = document.getElementById('certificateTable');
-      const tableBody = table.querySelector('tbody');
-      
-      errorDiv.textContent = ''; // Clear any previous error messages
-      table.style.display = 'none'; // Hide the table initially
-      tableBody.innerHTML = ''; // Clear the table content
+   document.getElementById('verifyForm').addEventListener('submit', async (event) => {
+  event.preventDefault(); // Prevent form submission
+  const certificateNo = document.getElementById('certificateNo').value.trim();
+  const errorDiv = document.getElementById('error');
+  const table = document.getElementById('certificateTable');
+  const tableBody = table.querySelector('tbody');
 
-      if (!certificateNo) {
-        errorDiv.textContent = 'Please enter a certificate number.';
-        return;
-      }
+  errorDiv.textContent = ''; // Clear any previous error messages
+  table.style.display = 'none'; // Hide the table initially
+  tableBody.innerHTML = ''; // Clear the table content
 
-      try {
-        const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/verifycertificate?certificateNo=${certificateNo}`);
-        if (!response.ok) {
-          throw new Error(`API returned status: ${response.status}`);
-        }
-        const data = await response.json();
+  if (!certificateNo) {
+    errorDiv.textContent = 'Please enter a certificate number.';
+    return;
+  }
 
-        // Check if a valid response is received
-        if (!data || Object.keys(data).length === 0) {
-          errorDiv.textContent = 'No data found for the given certificate number.';
-          return;
-        }
+  try {
+    const response = await fetch(`https://originalmahalaxmi.com:8084/api/v1/verifycertificate?certificateNo=${certificateNo}`);
+    if (!response.ok) {
+      throw new Error(`API returned status: ${response.status}`);
+    }
+    const data = await response.json();
 
-        // Populate the table with the API response data
-        for (const [key, value] of Object.entries(data)) {
-          const row = document.createElement('tr');
+    // Check if a valid response is received
+    if (!data || Object.keys(data).length === 0) {
+      errorDiv.textContent = 'No data found for the given certificate number.';
+      return;
+    }
+
+    // Mapping for user-friendly key titles
+    const keyMapping = {
+      id: "Certificate ID",
+      certificateNo: "Certificate Number",
+      date: "Issue Date",
+      nameOfHolders: "Holder's Name",
+      occupation: "Occupation",
+      address: "Address",
+      contactNo: "Contact Number",
+      nomineeNameAndAddress: "Nominee Name & Address",
+      totalAmount: "Total Amount",
+      validTill: "Valid Till",
+      place: "Place of Issue",
+      certificateURL: "Certificate URL",
+      roi: "Rate of Interest",
+      verified: "Verified Status"
+    };
+
+    // Set table title
+    const tableTitle = document.createElement('caption');
+    tableTitle.textContent = "Certificate Details";
+    tableTitle.style.fontWeight = "bold";
+    tableTitle.style.fontSize = "1.2rem";
+    tableTitle.style.color = "#9C2946";
+    table.appendChild(tableTitle);
+
+    // Populate the table with user-friendly keys and values
+    for (const [key, value] of Object.entries(data)) {
+      if (keyMapping[key]) { // Check if the key has a mapped title
+        const row = document.createElement('tr');
+
+        // Handle the "verified" field with icons
+        if (key === 'verified') {
+          const verifiedIcon = value
+            ? '<i class="fa-solid fa-circle-check" style="color: green;"></i> Verified'
+            : '<i class="fa-solid fa-circle-xmark" style="color: red;"></i> Not Verified';
+
           row.innerHTML = `
-            <td>${key}</td>
+            <td>${keyMapping[key]}</td>
+            <td>${verifiedIcon}</td>
+          `;
+        } else {
+          row.innerHTML = `
+            <td>${keyMapping[key]}</td>
             <td>${value !== null ? value : 'N/A'}</td>
           `;
-          tableBody.appendChild(row);
         }
 
-        // Display the table
-        table.style.display = 'table';
-      } catch (error) {
-        errorDiv.textContent = `Error: ${error.message}`;
+        tableBody.appendChild(row);
       }
-    });
+    }
+
+    // Display the table
+    table.style.display = 'table';
+  } catch (error) {
+    errorDiv.textContent = `Error: ${error.message}`;
+  }
+});
+
   </script>
 </body>
 </html>
