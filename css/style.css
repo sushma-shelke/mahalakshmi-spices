@@ -393,6 +393,7 @@ html, body{ height: 100%; }
 	background-size:cover;
 	height:100vh;
 	min-height:100%;
+  
 }
 
 .banner .container, .banner .banner-static, .banner .col-lg-12 {
@@ -419,7 +420,7 @@ html, body{ height: 100%; }
     line-height: 100px;
 	color:#fff;
 	padding-bottom: 0px;
-	padding-top:100px;
+	padding-top:10px;
 }
 
 .banner-text h2 {
