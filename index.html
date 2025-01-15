@@ -1339,11 +1339,146 @@ align-items: center;
                     //     card.appendChild(placeholder);
                     // }
 
-                    function displayUpdates() {
+//                     function displayUpdates() {
+//     const carousel = document.getElementById('carousel');
+//     carousel.innerHTML = '';
+
+//     const visibleUpdates = updates.slice(currentIndex, currentIndex + 4);
+
+//     visibleUpdates.forEach(update => {
+//         const card = document.createElement('div');
+//         card.classList.add('card');
+
+//         if (update.newsFileUrls && update.newsFileUrls.length > 0) {
+//             const imageSlider = document.createElement('div');
+//             imageSlider.classList.add('image-slider');
+
+//             // Split URLs by comma if they're in a string format
+//             const urls = Array.isArray(update.newsFileUrls) ? 
+//                         update.newsFileUrls : 
+//                         update.newsFileUrls.split(',').map(url => url.trim());
+
+//             urls.forEach((url, index) => {
+//                 const img = document.createElement('img');
+//                 img.src = url.startsWith('http') ? url : `https://originalmahalaxmi.com:8084/uploads/${url}`;
+//                 img.alt = update.newsTitle || 'News Image';
+//                 if (index === 0) {
+//                     img.classList.add('active');
+//                 }
+//                 imageSlider.appendChild(img);
+//             });
+
+//             // Add hover functionality
+//             let currentIndex = 0;
+//             const images = imageSlider.querySelectorAll('img');
+            
+//             imageSlider.addEventListener('mouseenter', function() {
+//                 let hoverInterval = setInterval(() => {
+//                     images[currentIndex].classList.remove('active');
+//                     currentIndex = (currentIndex + 1) % images.length;
+//                     images[currentIndex].classList.add('active');
+//                 }, 1000); // Change image every second on hover
+
+//                 imageSlider.addEventListener('mouseleave', function() {
+//                     clearInterval(hoverInterval);
+//                     // Reset to first image when mouse leaves
+//                     images.forEach((img, idx) => {
+//                         img.classList.remove('active');
+//                         if (idx === 0) img.classList.add('active');
+//                     });
+//                     currentIndex = 0;
+//                 });
+//             });
+
+//             card.appendChild(imageSlider);
+//         } else {
+//             const placeholder = document.createElement('p');
+//             placeholder.textContent = 'No Image Available';
+//             card.appendChild(placeholder);
+//         }
+
+        
+//                 const title = document.createElement('h2');
+//                 title.textContent = update.newsTitle || 'No Title';
+//                 card.appendChild(title);
+//                 title.style.fontSize = '24px';
+//                 title.style.fontWeight = 'bold';
+//                 title.style.color = '#ED3136';
+//                 title.style.textAlign = 'center';
+//                 title.style.marginTop = '10px';
+//                 title.style.marginBottom = '10px';
+        
+//                 const descPara = document.createElement('p');
+//                 descPara.textContent = update.newsDescription || 'No Description';
+//                 card.appendChild(descPara);
+//                 descPara.style.fontSize = '18px';
+//                 descPara.style.textAlign = 'center';
+//                 descPara.style.color = '#767676';
+//                 descPara.style.marginTop = '10px';
+//                 descPara.style.marginBottom = '10px';
+        
+// // delete button visibility for admin
+//                  const token = sessionStorage.getItem("token");
+//                  const deleteButton = document.createElement('button');
+//                  const editButton = document.createElement('button');
+// if (token ) {
+   
+//     deleteButton.textContent = 'Delete';
+//     deleteButton.id = 'delete-button';  // Static id
+
+//     deleteButton.style.backgroundColor = '#ED3136';
+//     deleteButton.style.color = '#fff';
+//     deleteButton.style.border = 'none';
+//     deleteButton.style.padding = '10px 20px';
+//     deleteButton.style.cursor = 'pointer';
+//     deleteButton.style.marginTop = '10px';
+
+//     deleteButton.addEventListener('click', () => deleteUpdate(update.id));
+    
+   
+    
+// } else {
+//     deleteButton.style.display = 'none';
+//     editButton.style.display = 'none';
+// }
+
+//          // Add edit button
+//         //  const editButton = document.createElement('button');
+//                 editButton.textContent = 'Edit';
+//                 editButton.style.backgroundColor = '#3498db';
+//                 editButton.style.color = '#fff';
+//                 editButton.style.border = 'none';
+//                 editButton.style.marginLeft='10px';
+//                 editButton.style.padding = '10px 20px';
+//                 editButton.style.cursor = 'pointer';
+//                 editButton.style.marginTop = '10px';
+//                 editButton.addEventListener('click', () => editUpdate(update));
+        
+//                 card.appendChild(deleteButton);
+//                 card.appendChild(editButton);
+        
+//                 carousel.appendChild(card);
+//             });
+//         }
+           
+function displayUpdates() {
     const carousel = document.getElementById('carousel');
     carousel.innerHTML = '';
 
-    const visibleUpdates = updates.slice(currentIndex, currentIndex + 4);
+    // Create a circular array of updates for continuous display
+    const totalUpdates = updates.length;
+    let visibleUpdates = [];
+    
+    // If we have less than 4 updates, just show what we have
+    if (totalUpdates <= 4) {
+        visibleUpdates = updates;
+    } else {
+        // Get 4 updates starting from currentIndex, wrapping around if necessary
+        for (let i = 0; i < 4; i++) {
+            const index = (currentIndex + i) % totalUpdates;
+            visibleUpdates.push(updates[index]);
+        }
+    }
 
     visibleUpdates.forEach(update => {
         const card = document.createElement('div');
@@ -1397,71 +1532,71 @@ align-items: center;
             card.appendChild(placeholder);
         }
 
-        
-                const title = document.createElement('h2');
-                title.textContent = update.newsTitle || 'No Title';
-                card.appendChild(title);
-                title.style.fontSize = '24px';
-                title.style.fontWeight = 'bold';
-                title.style.color = '#ED3136';
-                title.style.textAlign = 'center';
-                title.style.marginTop = '10px';
-                title.style.marginBottom = '10px';
-        
-                const descPara = document.createElement('p');
-                descPara.textContent = update.newsDescription || 'No Description';
-                card.appendChild(descPara);
-                descPara.style.fontSize = '18px';
-                descPara.style.textAlign = 'center';
-                descPara.style.color = '#767676';
-                descPara.style.marginTop = '10px';
-                descPara.style.marginBottom = '10px';
-        
-// delete button visibility for admin
-                 const token = sessionStorage.getItem("token");
-                 const deleteButton = document.createElement('button');
-                 const editButton = document.createElement('button');
-if (token ) {
-   
-    deleteButton.textContent = 'Delete';
-    deleteButton.id = 'delete-button';  // Static id
+        const title = document.createElement('h2');
+        title.textContent = update.newsTitle || 'No Title';
+        card.appendChild(title);
+        title.style.fontSize = '24px';
+        title.style.fontWeight = 'bold';
+        title.style.color = '#ED3136';
+        title.style.textAlign = 'center';
+        title.style.marginTop = '10px';
+        title.style.marginBottom = '10px';
 
-    deleteButton.style.backgroundColor = '#ED3136';
-    deleteButton.style.color = '#fff';
-    deleteButton.style.border = 'none';
-    deleteButton.style.padding = '10px 20px';
-    deleteButton.style.cursor = 'pointer';
-    deleteButton.style.marginTop = '10px';
+        const descPara = document.createElement('p');
+        descPara.textContent = update.newsDescription || 'No Description';
+        card.appendChild(descPara);
+        descPara.style.fontSize = '18px';
+        descPara.style.textAlign = 'center';
+        descPara.style.color = '#767676';
+        descPara.style.marginTop = '10px';
+        descPara.style.marginBottom = '10px';
 
-    deleteButton.addEventListener('click', () => deleteUpdate(update.id));
-    
-   
-    
-} else {
-    deleteButton.style.display = 'none';
-    editButton.style.display = 'none';
+        // delete button visibility for admin
+        const token = sessionStorage.getItem("token");
+        const deleteButton = document.createElement('button');
+        const editButton = document.createElement('button');
+        
+        if (token) {
+            deleteButton.textContent = 'Delete';
+            deleteButton.id = 'delete-button';
+            deleteButton.style.backgroundColor = '#ED3136';
+            deleteButton.style.color = '#fff';
+            deleteButton.style.border = 'none';
+            deleteButton.style.padding = '10px 20px';
+            deleteButton.style.cursor = 'pointer';
+            deleteButton.style.marginTop = '10px';
+            deleteButton.addEventListener('click', () => deleteUpdate(update.id));
+        } else {
+            deleteButton.style.display = 'none';
+            editButton.style.display = 'none';
+        }
+
+        editButton.textContent = 'Edit';
+        editButton.style.backgroundColor = '#3498db';
+        editButton.style.color = '#fff';
+        editButton.style.border = 'none';
+        editButton.style.marginLeft = '10px';
+        editButton.style.padding = '10px 20px';
+        editButton.style.cursor = 'pointer';
+        editButton.style.marginTop = '10px';
+        editButton.addEventListener('click', () => editUpdate(update));
+
+        card.appendChild(deleteButton);
+        card.appendChild(editButton);
+        carousel.appendChild(card);
+    });
 }
 
-         // Add edit button
-        //  const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
-                editButton.style.backgroundColor = '#3498db';
-                editButton.style.color = '#fff';
-                editButton.style.border = 'none';
-                editButton.style.marginLeft='10px';
-                editButton.style.padding = '10px 20px';
-                editButton.style.cursor = 'pointer';
-                editButton.style.marginTop = '10px';
-                editButton.addEventListener('click', () => editUpdate(update));
-        
-                card.appendChild(deleteButton);
-                card.appendChild(editButton);
-        
-                carousel.appendChild(card);
-            });
+function startCarouselAutoSlider() {
+    setInterval(() => {
+        const totalUpdates = updates.length;
+        if (totalUpdates > 4) {
+            currentIndex = (currentIndex + 1) % totalUpdates;
+            displayUpdates();
         }
-           
-        
+    }, 5000); // Change slides every 5 seconds
+}
+
       
         function editUpdate(update) {
     // Create modal
@@ -1747,15 +1882,15 @@ submitButton.addEventListener('click', async () => {
             }
         }
         
-        function startCarouselAutoSlider() {
-            setInterval(() => {
-                currentIndex += 4;
-                if (currentIndex >= updates.length) {
-                    currentIndex = 0;
-                }
-                displayUpdates();
-            }, 5000); // Change slides every 5 seconds
-        }
+        // function startCarouselAutoSlider() {
+        //     setInterval(() => {
+        //         currentIndex += 4;
+        //         if (currentIndex >= updates.length) {
+        //             currentIndex = 0;
+        //         }
+        //         displayUpdates();
+        //     }, 5000); // Change slides every 5 seconds
+        // }
         
         function startImageSlider(imageSlider) {
             let images = imageSlider.querySelectorAll('img');
@@ -1911,8 +2046,10 @@ submitButton.addEventListener('click', async () => {
                 data.forEach(item => {
                   const newSlide = document.createElement('div');
                   newSlide.classList.add('swiper-slide');
+                //   console.log(item,"tetete")
                   newSlide.innerHTML = `
                     <img src="${item.imageUrl}" alt="${item.title}" />
+                    <h2>${item.imageTitle}</h2>
  ${token ? `<button onclick="deleteImage('${item.id}')" class="delete-button">Delete</button>` : ''}
                   `;
                   swiperWrapper.appendChild(newSlide);
