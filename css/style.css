@@ -2321,3 +2321,18 @@ textarea{
     font-style: normal;
     font-size: 65px;
   }
+  .gallery-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(237, 49, 54);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.gallery-desc{
+  font-size: 18px;
+  text-align: center;
+  color: rgb(118, 118, 118);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
