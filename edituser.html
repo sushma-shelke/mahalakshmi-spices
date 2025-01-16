@@ -50,6 +50,9 @@
     <!-- Modernizer -->
     <script src="js/modernizer.js"></script>
     <style>
+      .header-block-top {
+        background-color: #1a1a1a;
+      }
       body {
         background-color: #f8f9fa;
         padding-top: 20px;
@@ -167,18 +170,24 @@
                   </button>
                   <div id="navbar" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
-                      <li class="active">
+                      <li class="active" style="position: relative;
+    top: 9px;">
                         <a href="./index.html">HOME</a>
                       </li>
-                      <li><a href="index.html#about">ABOUT US</a></li>
-                      <li>
+                      <li style="position: relative;
+    top: 9px;"><a href="index.html#about">ABOUT US</a></li>
+                      <li style="position: relative;
+    top: 9px;">
                         <a href="index.html#special-collection"
                           >SPECIAL COLLECTION</a
                         >
                       </li>
-                      <li><a href="index.html#news">NEWS</a></li>
-                      <li><a href="index.html#contact">CONTACT US</a></li>
-                      <li>
+                      <li style="position: relative;
+    top: 9px;"><a href="index.html#news">NEWS</a></li>
+                      <li style="position: relative;
+    top: 9px;"><a href="index.html#contact">CONTACT US</a></li>
+                      <li style="position: relative;
+    top: 9px;">
                         <a href="./stockAllocationForm.html">INVESTOR FORM</a>
                       </li>
 
@@ -259,7 +268,7 @@
 
             <div class="col-md-6">
               <label class="form-label">Monthly Return of interest (%)</label>
-              <input type="number" class="form-control" id="roi" required />
+              <input type="text" class="form-control" id="roi" required placeholder="example : 3.33 " />
             </div>
 
             <div class="col-md-6">
@@ -443,6 +452,34 @@
           navbar.innerHTML += loginItem;
         }
       });
+    </script>
+
+<!-- <script>
+  document.getElementById('roi').addEventListener('input', function (e) {
+      const value = e.target.value;
+      if (!/^\d*\.?\d*$/.test(value)) {
+          e.target.value = value.slice(0, -1);
+      }
+  });
+  </script> -->
+
+  <script>
+    document.getElementById('roi').addEventListener('input', function (e) {
+        const value = e.target.value;
+        
+        if (!/^\d{0,2}(\.\d{0,2})?$/.test(value)) {
+            // Check which condition is violated
+            if (value.includes('.') && value.split('.')[0].length > 2) {
+                alert('You can not enter more than 2 digits before the decimal.');
+            } else if (value.includes('.') && value.split('.')[1].length > 2) {
+                alert('You can not enter more than 2 digits after the decimal.');
+            } else if (!value.includes('.') && value.length > 2) {
+                alert('You can enter only 2 digits if there is no decimal.');
+            }
+            
+            e.target.value = value.slice(0, -1); // Remove the last invalid character
+        }
+    });
     </script>
   </body>
 </html>

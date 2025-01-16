@@ -155,7 +155,7 @@
                         <a href="./index.html">HOME</a>
                       </li>
                       <li style="padding-top: 20px">
-                        <a href="index.html#about">ABOUT US</a>
+                        <a href="index.html#about">ABOUT</a>
                       </li>
                       <li style="padding-top: 20px">
                         <a href="index.html#special-collection"
@@ -166,7 +166,7 @@
                         <a href="index.html#our_team">NEWS</a>
                       </li>
                       <li style="padding-top: 20px">
-                        <a href="index.html#contact">CONTACT US</a>
+                        <a href="index.html#contact">CONTACT</a>
                       </li>
                       <li style="padding-top: 20px">
                         <a href="./stockAllocationForm.html">INVESTOR FORM</a>
@@ -231,6 +231,7 @@
                     <th>Contact No.</th>
                     <th>Nominee Name And Address</th>
                     <th>Total Amount (₹)</th>
+                    <th>Total Amount in Words</th>
                     <th>Monthly Returns</th>
                     <th>Edit</th>
                     <th>Comfirm</th>
@@ -397,7 +398,7 @@
     <script src="js/custom.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+    <!-- <script>
       let currentPage = 0;
       let currentEditId = null;
       // const editModal = new bootstrap.Modal(document.getElementById('editModal'));
@@ -687,8 +688,398 @@
           toggleLoading(false);
         }
       }
-    </script>
+    </script> -->
+   
     <script>
+      let currentPage = 0;
+      let currentEditId = null;
+    
+      function toggleLoading(show) {
+        document.querySelector(".loading-spinner").style.display = show
+          ? "block"
+          : "none";
+        document.querySelector(".overlay").style.display = show
+          ? "block"
+          : "none";
+      }
+    
+      function formatDate(dateString) {
+        if (!dateString) return "-";
+        return new Date(dateString).toLocaleDateString("en-GB");
+      }
+    
+      function calculateReturns(amount) {
+        const monthlyRate = 0.03;
+        const yearlyRate = 0.36;
+        return {
+          monthly: amount * monthlyRate,
+          yearly: amount * yearlyRate,
+        };
+      }
+    
+      function numberToWords(num) {
+  if (num === 0) return 'Zero';
+
+  const belowTwenty = [
+    '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
+    'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen',
+    'Eighteen', 'Nineteen'
+  ];
+
+  const tens = [
+    '', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
+  ];
+
+  const scales = ['', 'Thousand', 'Lakh', 'Crore'];
+
+  let words = '';
+
+  function getBelowThousand(n) {
+    if (n < 20) {
+      return belowTwenty[n];
+    } else if (n < 100) {
+      return tens[Math.floor(n / 10)] + (n % 10 !== 0 ? ' ' + belowTwenty[n % 10] : '');
+    } else {
+      return belowTwenty[Math.floor(n / 100)] + ' Hundred' + (n % 100 !== 0 ? ' ' + getBelowThousand(n % 100) : '');
+    }
+  }
+
+  let scaleIndex = 0;
+
+  while (num > 0) {
+    let currentChunk = num % 1000;
+
+    if (scaleIndex === 1) { // Thousands
+      currentChunk = num % 100;
+      num = Math.floor(num / 100);
+    } else {
+      num = Math.floor(num / 1000);
+    }
+
+    if (currentChunk > 0) {
+      const chunkWords = getBelowThousand(currentChunk);
+      words = chunkWords + (scales[scaleIndex] ? ' ' + scales[scaleIndex] : '') + (words ? ' ' + words : '');
+    }
+
+    scaleIndex++;
+  }
+
+  return words.trim();
+}
+
+async function displayData(page) {
+  const data = await fetchData(page);
+  const tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+
+  data.content.forEach((item) => {
+    const amount = parseFloat(item.totalAmount);
+    const returns = calculateReturns(amount);
+    const amountInWords = numberToWords(amount);
+
+    const row = document.createElement("tr");
+    const isRoiValid = item.roi && item.roi !== "0" && item.roi !== 0;
+
+    row.innerHTML = `
+      <td>${formatDate(item.date ? item.date : item.validTill)}</td>
+      <td>${item.nameOfHolders}</td>
+      <td>${item.occupation}</td>
+      <td>${item.address}</td>
+      <td>${item.contactNo}</td>
+      <td>${item.nomineeNameAndAddress}</td>
+      <td>₹${amount.toLocaleString()}</td>
+      <td>${item.roi ? item.roi : "0"}%</td>
+      <td>${amountInWords}</td>
+      <td>
+          <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+      </td>
+      <td>
+          <button class="btn btn-sm btn-success" 
+              onclick="confirmItem('${item.id}', '${item.contactNo}', '${item.nameOfHolders}')" 
+              ${!isRoiValid || item.verified ? "disabled" : ""}>
+              ${item.verified ? "Verified" : !isRoiValid ? "Add ROI" : "Confirm"}
+          </button>
+      </td>
+      <td>
+          <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  updatePagination(data.totalPages);
+  updateRange(
+    page * data.content.length + 1,
+    Math.min((page + 1) * data.content.length, data.totalItems),
+    data.totalItems
+  );
+}
+
+      // function numberToWords(number) {
+      //   const units = [
+      //     "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+      //   ];
+      //   const teens = [
+      //     "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+      //   ];
+      //   const tens = [
+      //     "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+      //   ];
+      //   const scales = ["", "Thousand", "Million", "Billion"];
+    
+      //   if (number === 0) return units[0];
+    
+      //   let words = "";
+    
+      //   function convertChunk(number) {
+      //     let chunk = "";
+      //     const hundreds = Math.floor(number / 100);
+      //     const remainder = number % 100;
+    
+      //     if (hundreds) {
+      //       chunk += `${units[hundreds]} Hundred `;
+      //     }
+    
+      //     if (remainder) {
+      //       if (remainder < 10) {
+      //         chunk += units[remainder];
+      //       } else if (remainder < 20) {
+      //         chunk += teens[remainder - 11];
+      //       } else {
+      //         const tenUnit = Math.floor(remainder / 10);
+      //         const unit = remainder % 10;
+      //         chunk += tens[tenUnit - 1];
+      //         if (unit) {
+      //           chunk += `-${units[unit]}`;
+      //         }
+      //       }
+      //     }
+    
+      //     return chunk.trim();
+      //   }
+    
+      //   let scale = 0;
+    
+      //   while (number > 0) {
+      //     const chunk = number % 1000;
+      //     if (chunk) {
+      //       const chunkWords = convertChunk(chunk);
+      //       words = `${chunkWords} ${scales[scale]} ${words}`.trim();
+      //     }
+      //     number = Math.floor(number / 1000);
+      //     scale++;
+      //   }
+    
+      //   return words;
+      // }
+    
+      function updatePagination(totalPages) {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+    
+        const prevLi = document.createElement("li");
+        prevLi.className = `page-item ${currentPage === 0 ? "disabled" : ""}`;
+        prevLi.innerHTML = '<a class="page-link" href="#">Previous</a>';
+        prevLi.onclick = () => {
+          if (currentPage > 0) {
+            currentPage--;
+            displayData(currentPage);
+          }
+        };
+        pagination.appendChild(prevLi);
+    
+        for (let i = 0; i < totalPages; i++) {
+          const li = document.createElement("li");
+          li.className = `page-item ${currentPage === i ? "active" : ""}`;
+          li.innerHTML = `<a class="page-link" href="#">${i + 1}</a>`;
+          li.onclick = () => {
+            currentPage = i;
+            displayData(currentPage);
+          };
+          pagination.appendChild(li);
+        }
+    
+        const nextLi = document.createElement("li");
+        nextLi.className = `page-item ${currentPage === totalPages - 1 ? "disabled" : ""}`;
+        nextLi.innerHTML = '<a class="page-link" href="#">Next</a>';
+        nextLi.onclick = () => {
+          if (currentPage < totalPages - 1) {
+            currentPage++;
+            displayData(currentPage);
+          }
+        };
+        pagination.appendChild(nextLi);
+      }
+    
+      function updateRange(start, end, total) {
+        document.getElementById("startRange").textContent = start;
+        document.getElementById("endRange").textContent = end;
+        document.getElementById("totalEntries").textContent = total;
+      }
+    
+      document.addEventListener("DOMContentLoaded", () => {
+        displayData(currentPage);
+      });
+    
+      async function fetchData(page = 0) {
+        toggleLoading(true);
+        try {
+          const response = await fetch(
+            `https://originalmahalaxmi.com:8084/api/v1/admin/pending-requests?page=${page}`
+          );
+          if (!response.ok) throw new Error("Failed to fetch data");
+          return await response.json();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error loading data");
+          return { content: [], currentPage: 0, totalPages: 0, totalItems: 0 };
+        } finally {
+          toggleLoading(false);
+        }
+      }
+    
+      async function displayData(page) {
+        const data = await fetchData(page);
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+    
+        data.content.forEach((item) => {
+          const amount = parseFloat(item.totalAmount);
+          const amountInWords = numberToWords(amount);
+    
+          const row = document.createElement("tr");
+          const isRoiValid = item.roi && item.roi !== "0" && item.roi !== 0;
+    
+          row.innerHTML = `
+            <td>${formatDate(item.date ? item.date : item.validTill)}</td>
+            <td>${item.nameOfHolders}</td>
+            <td>${item.occupation}</td>
+            <td>${item.address}</td>
+            <td>${item.contactNo}</td>
+            <td>${item.nomineeNameAndAddress}</td>
+            <td>₹${amount.toLocaleString()}</td>
+            <td>${amountInWords} Rupees</td>
+            <td>${item.roi ? item.roi : "0"}%</td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="editItem('${item.id}')">Edit</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-success" 
+                    onclick="confirmItem('${item.id}', '${item.contactNo}', '${item.nameOfHolders}')" 
+                    ${!isRoiValid || item.verified ? "disabled" : ""}>
+                    ${item.verified ? "Verified" : !isRoiValid ? "Add ROI" : "Confirm"}
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('${item.id}')">Delete</button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+    
+        updatePagination(data.totalPages);
+        updateRange(
+          page * data.content.length + 1,
+          Math.min((page + 1) * data.content.length, data.totalItems),
+          data.totalItems
+        );
+      }
+    
+      async function editItem(id) {
+        window.location.href = `edituser.html?id=${id}`;
+      }
+    
+      async function confirmItem(id, contactNo, nameOfHolders) {
+        if (!confirm("Are you sure you want to confirm this application?")) {
+          return;
+        }
+    
+        toggleLoading(true);
+        try {
+          const response = await fetch(
+            `https://originalmahalaxmi.com:8084/api/v1/admin/verify/${id}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+    
+          if (!response.ok) {
+            throw new Error("Failed to confirm item");
+          }
+    
+          const result = await response.json();
+    
+          if (result.data && result.data.certificateURL) {
+            const encodedCertificateURL = result.data.certificateURL.replace(
+              / /g,
+              "%20"
+            );
+    
+            const message = encodeURIComponent(
+              `🌟 *Certificate Generated Successfully* 🌟\n\n` +
+                `Dear *${nameOfHolders}*,\n\n` +
+                `Your stock allocation certificate has been generated. Please click the link below to view your certificate:\n\n` +
+                `${encodedCertificateURL}\n\n` +
+                `*Thank you for choosing ORGANIC KHANDESHI FOOD PRODUCTS.*\n\n` +
+                `Best regards,\n` +
+                `ORGANIC KHANDESHI FOOD PRODUCTS Team`
+            );
+    
+            window.open(
+              `https://wa.me/91${contactNo}?text=${message}`,
+              "_blank"
+            );
+          }
+    
+          alert("Application confirmed successfully");
+          displayData(currentPage);
+        } catch (error) {
+          console.error("Error:", error);
+          alert(
+            "Please check all fields are filled or not Specially Monthly return. Please try again."
+          );
+        } finally {
+          toggleLoading(false);
+        }
+      }
+    
+      async function deleteItem(id) {
+        if (!confirm("Are you sure you want to delete this ?")) {
+          return;
+        }
+    
+        toggleLoading(true);
+        try {
+          const response = await fetch(
+            `https://originalmahalaxmi.com:8084/api/v1/admin/delete/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+    
+          if (!response.ok) {
+            throw new Error("Failed to delete item");
+          }
+    
+          alert("Record deleted successfully");
+          displayData(currentPage);
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error deleting item. Please try again.");
+        } finally {
+          toggleLoading(false);
+        }
+      }
+    </script>
+    
+   
+   <script>
       // Check for sessionStorage values
       document.addEventListener("DOMContentLoaded", function () {
         const token = sessionStorage.getItem("token");
@@ -735,5 +1126,6 @@
         }
       });
     </script>
+=
   </body>
 </html>
