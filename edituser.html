@@ -95,7 +95,7 @@
       }
 
       .nav-link {
-        padding: 20px !important;
+        /* padding: 20px !important; */
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 1px;
@@ -118,7 +118,10 @@
       .navbar-toggler-icon {
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
       }
-
+.col-md-6,.col-12{
+padding-left: 15px;
+padding-right:15px;
+}
       @media (max-width: 991px) {
         .navbar-collapse {
           background-color: #1a1a1a;
@@ -226,7 +229,7 @@
         </div>
 
         <form id="editForm" onsubmit="handleSubmit(event)">
-          <div class="row g-4">
+          <div class="row ">
             <div class="col-md-6">
               <label class="form-label">Name(s) of Holder(s)</label>
               <input
@@ -311,19 +314,25 @@
               <input type="date" class="form-control" id="validTill" required />
             </div>
 
-            <div class="col-12 mt-4 d-flex justify-content-between" >
+           
+          </div>
+          <div class="row"  style="margin-top: 20px; display: flex;">
+            <div class="col-md-6 col-lg-6 col-sm-12" style="display:flex ; justify-content: flex-start;" >
               <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="window.location.href='userlist.html'"
-              >
-                Back
-              </button>
-              <button type="submit" class="btn btn-primary">
+              type="button"
+              class="btn btn-secondary"
+              onclick="window.location.href='userlist.html'"
+           >
+              Back
+            </button>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12" style="display:flex ; justify-content: flex-end;">
+              <button type="submit" class="btn btn-primary"  >
                 Save Changes
               </button>
             </div>
           </div>
+         
         </form>
       </div>
     </div>
